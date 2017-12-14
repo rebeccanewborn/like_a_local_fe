@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import * as actions from "../actions";
 
 class Login extends React.Component {
   constructor(props) {
@@ -10,15 +11,20 @@ class Login extends React.Component {
     };
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(ev) {
     this.setState({ [ev.target.name]: ev.target.value });
   }
+  handleSubmit(ev) {
+    ev.preventDefault();
+    this.props.login(this.state.email, this.state.password);
+  }
 
   render() {
     return (
-      <form>
+      <form onSubmit={this.handleSubmit}>
         <label>Enter your email</label>
         <input type="text" name="email" onChange={this.handleChange} />
         <label>Enter your password</label>
@@ -29,4 +35,4 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+export default connect(null, actions)(Login);
