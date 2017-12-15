@@ -1,6 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
-import * as actions from "../actions";
+import * as userActions from "../actions/userActions";
+
+let actions = { ...userActions };
 
 class Login extends React.Component {
   constructor(props) {
@@ -28,7 +30,7 @@ class Login extends React.Component {
         <label>Enter your email</label>
         <input type="text" name="email" onChange={this.handleChange} />
         <label>Enter your password</label>
-        <input type="text" name="password" onChange={this.handleChange} />
+        <input type="password" name="password" onChange={this.handleChange} />
         <input type="submit" />
       </form>
     );

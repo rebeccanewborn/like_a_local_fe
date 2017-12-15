@@ -4,7 +4,7 @@ const headers = {
   "Content-Type": "application/json"
 };
 
-export const postLogin = (email, password) => {
+export const postAuthSession = (email, password) => {
   let data = {
     email,
     password
@@ -13,5 +13,15 @@ export const postLogin = (email, password) => {
     method: "POST",
     body: JSON.stringify(data),
     headers
-  });
+  }).then(res => res.json());
+};
+
+export const getAuthSession = token => {
+  return fetch(`${baseURL}/login`, {
+    headers: { ...headers, token }
+  }).then(res => res.json());
+};
+
+export const fetchAllCities = () => {
+  return fetch(`${baseURL}/cities`, { headers }).then(res => res.json());
 };
