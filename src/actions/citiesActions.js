@@ -1,4 +1,4 @@
-import { GET_ALL_CITIES } from "./types";
+import { GET_ALL_CITIES, SELECT_CITY } from "./types";
 import { fetchAllCities } from "../services/api";
 
 export const getAllCities = () => {
@@ -6,4 +6,8 @@ export const getAllCities = () => {
     fetchAllCities().then(json =>
       dispatch({ type: GET_ALL_CITIES, payload: json })
     );
+};
+
+export const selectCity = cityObj => {
+  return { type: SELECT_CITY, payload: cityObj };
 };

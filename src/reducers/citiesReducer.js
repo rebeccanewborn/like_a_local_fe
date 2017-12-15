@@ -1,4 +1,4 @@
-import { GET_ALL_CITIES } from "../actions/types";
+import { GET_ALL_CITIES, SELECT_CITY } from "../actions/types";
 
 export const citiesReducer = (state = [], action) => {
   switch (action.type) {
@@ -9,8 +9,10 @@ export const citiesReducer = (state = [], action) => {
   }
 };
 
-export const currentCityReducer = (state = null, action) => {
+export const currentCityReducer = (state = {}, action) => {
   switch (action.type) {
+    case SELECT_CITY:
+      return action.payload;
     default:
       return state;
   }

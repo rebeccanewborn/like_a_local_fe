@@ -1,10 +1,20 @@
-import { LOGIN_USER, LOGOUT_USER, LOAD_LOGGED_IN_USER } from "./types.js";
+import {
+  LOGIN_USER,
+  LOGIN_ERROR,
+  LOGOUT_USER,
+  LOAD_LOGGED_IN_USER
+} from "./types.js";
 import { postAuthSession, getAuthSession } from "../services/api";
 
-export const login = (email, password) => {
+export const login = (email, password, history) => {
   return dispatch => {
     postAuthSession(email, password).then(json => {
-      dispatch({ type: LOGIN_USER, payload: json });
+      if (json.error) {
+        dispatch({ type: LOGIN_ERROR });
+      } else {
+        dispatch({ type: LOGIN_USER, payload: json });
+        history.push("/cities");
+      }
     });
   };
 };
