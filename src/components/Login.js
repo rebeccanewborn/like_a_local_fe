@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
+import { Form, Header, Message, Input, Button } from "semantic-ui-react";
 import * as userActions from "../actions/userActions";
 
 let actions = { ...userActions };
@@ -29,15 +30,32 @@ class Login extends React.Component {
     return (
       <div>
         {this.props.loginError ? (
-          <h1>Invalid Login Credentials. Please Try Again.</h1>
+          <Message negative>
+            Invalid Login Credentials. Please Try Again.
+          </Message>
         ) : null}
-        <form onSubmit={this.handleSubmit}>
-          <label>Enter your email</label>
-          <input type="text" name="email" onChange={this.handleChange} />
-          <label>Enter your password</label>
-          <input type="password" name="password" onChange={this.handleChange} />
-          <input type="submit" />
-        </form>
+        <Form onSubmit={this.handleSubmit}>
+          <Form.Field>
+            <label>Enter your email</label>
+            <Input
+              type="text"
+              name="email"
+              onChange={this.handleChange}
+              value={this.state.email}
+            />
+          </Form.Field>
+          <Form.Field>
+            <label>Enter your password</label>
+            <Input
+              type="password"
+              name="password"
+              onChange={this.handleChange}
+              value={this.state.password}
+            />
+          </Form.Field>
+          <Button type="submit">Submit</Button>
+        </Form>
+        <Link to="/signup">Sign Up Here</Link>
       </div>
     );
   }

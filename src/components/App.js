@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { Route, withRouter } from "react-router-dom";
+import { Switch, Route, withRouter } from "react-router-dom";
 import LikeALocalContainer from "./LikeALocalContainer";
 import Login from "./Login";
+import Signup from "./Signup";
 import actions from "../actions";
 
 //redux imports
@@ -17,11 +18,13 @@ class App extends Component {
     }
   }
   render() {
-    console.log("APP PROPS", this.props);
     return (
       <div>
-        <Route exact path="/login" component={Login} />
-        <Route path="/cities" component={LikeALocalContainer} />
+        <Switch>
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/signup" component={Signup} />
+          <Route path="/" component={LikeALocalContainer} />
+        </Switch>
       </div>
     );
   }

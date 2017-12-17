@@ -10,7 +10,6 @@ const currentUser = {};
 export const currentUserReducer = (state = currentUser, action) => {
   switch (action.type) {
     case LOGIN_ERROR:
-      console.log("login error, state is", state);
       return { error: "Invalid Login Credentials. Please Try Again" };
     case LOGIN_USER:
       localStorage.setItem("token", action.payload.jwt);
