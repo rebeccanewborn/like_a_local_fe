@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { Switch, Route, withRouter } from "react-router-dom";
-import LikeALocalContainer from "./LikeALocalContainer";
-import Login from "./Login";
-import Signup from "./Signup";
+import LikeALocalContainer from "../containers/LikeALocalContainer";
 import actions from "../actions";
 
 //redux imports
@@ -21,8 +19,6 @@ class App extends Component {
     return (
       <div>
         <Switch>
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/signup" component={Signup} />
           <Route path="/" component={LikeALocalContainer} />
         </Switch>
       </div>

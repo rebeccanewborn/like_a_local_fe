@@ -1,5 +1,5 @@
 import { GET_ALL_CITIES, SELECT_CITY } from "./types";
-import { fetchAllCities } from "../services/api";
+import { fetchAllCities, getCity } from "../services/api";
 
 export const getAllCities = () => {
   return dispatch =>
@@ -8,6 +8,11 @@ export const getAllCities = () => {
     );
 };
 
-export const selectCity = cityObj => {
-  return { type: SELECT_CITY, payload: cityObj };
+export const selectCity = id => {
+  console.log("city action", id);
+  return dispatch => {
+    getCity(id).then(res => {
+      dispatch({ type: SELECT_CITY, payload: res });
+    });
+  };
 };

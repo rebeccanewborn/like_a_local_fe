@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { withRouter, Link } from "react-router-dom";
-import { Form, Header, Message, Input, Button } from "semantic-ui-react";
+import { Form, Message, Input, Button } from "semantic-ui-react";
 import * as userActions from "../actions/userActions";
 
 let actions = { ...userActions };

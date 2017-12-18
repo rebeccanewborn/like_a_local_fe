@@ -3,8 +3,11 @@ import { connect } from "react-redux";
 import { Segment, Image } from "semantic-ui-react";
 
 const CityShow = props => {
-  console.log("city show props", props);
-  let excursions = props.city.excursions.map(excur => excur.title);
+  console.log(props);
+  let excursions;
+  if (props.city.excursions) {
+    excursions = props.city.excursions.map(excur => <li>{excur.title}</li>);
+  }
 
   return (
     <div>
@@ -24,8 +27,4 @@ const CityShow = props => {
   );
 };
 
-const mapStateToProps = state => {
-  return { city: state.currentCity };
-};
-
-export default connect(mapStateToProps)(CityShow);
+export default CityShow;

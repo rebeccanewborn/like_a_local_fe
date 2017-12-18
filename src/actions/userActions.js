@@ -1,5 +1,4 @@
 import {
-  SIGNUP_USER,
   LOGIN_USER,
   LOGIN_ERROR,
   LOGOUT_USER,

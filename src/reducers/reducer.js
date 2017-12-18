@@ -7,7 +7,6 @@ import { currentExcursionReducer } from "./currentExcursionReducer";
 
 export const reducer = combineReducers({
   currentUser: currentUserReducer,
-  cities: citiesReducer,
-  currentCity: currentCityReducer,
-  currentExcursion: currentExcursionReducer
+  currentExcursion: currentExcursionReducer,
+  cities: citiesReducer
 });
