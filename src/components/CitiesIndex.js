@@ -1,5 +1,4 @@
 import React from "react";
-import { connect } from "react-redux";
 import CityIndexItem from "./CityIndexItem";
 import { Grid } from "semantic-ui-react";
 

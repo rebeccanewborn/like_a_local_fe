@@ -21,11 +21,11 @@ export const signup = (data, history) => {
 
 export const login = (email, password, history) => {
   return dispatch => {
-    postAuthSession(email, password).then(json => {
-      if (json.error) {
+    postAuthSession(email, password).then(res => {
+      if (res.error) {
         dispatch({ type: LOGIN_ERROR });
       } else {
-        dispatch({ type: LOGIN_USER, payload: json });
+        dispatch({ type: LOGIN_USER, payload: res });
         history.push("/cities");
       }
     });

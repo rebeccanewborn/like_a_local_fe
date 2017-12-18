@@ -2,6 +2,7 @@ import React from "react";
 import { withRouter, Switch, Route } from "react-router-dom";
 import * as actions from "../actions/citiesActions";
 import { connect } from "react-redux";
+import { Loader } from "semantic-ui-react";
 import CitiesIndex from "../components/CitiesIndex";
 import CityShow from "../components/CityShow";
 
@@ -9,10 +10,10 @@ class CitiesContainer extends React.Component {
   index = () => this.props.location.pathname.slice(8);
 
   renderShow = ({ match }) => {
-    let currentCity = this.props.allCities.find(
-      city => city.id === parseInt(match.params.id)
+    let currentCity = this.props.cities.find(
+      city => city.id === parseInt(match.params.id, 10)
     );
-    return <CityShow city={currentCity} />;
+    return currentCity ? <CityShow city={currentCity} /> : <Loader />;
   };
   render() {
     return (
@@ -20,7 +21,7 @@ class CitiesContainer extends React.Component {
         <Route
           exact
           path="/cities"
-          render={() => <CitiesIndex cities={this.props.allCities} />}
+          render={() => <CitiesIndex cities={this.props.cities} />}
         />
         <Route exact path="/cities/:id" render={this.renderShow} />
       </Switch>
@@ -30,7 +31,7 @@ class CitiesContainer extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    allCities: state.cities.allCities
+    cities: state.cities
   };
 };
 

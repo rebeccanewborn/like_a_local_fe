@@ -1,6 +1,6 @@
 import React from "react";
 import { Form, Input, Button, Dropdown } from "semantic-ui-react";
-import * as actions from "../actions/excursionActions";
+import actions from "../actions";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
@@ -12,8 +12,15 @@ class NewExcursion extends React.Component {
       description: "",
       duration: "",
       price: "",
-      city_id: null
+      city_id: null,
+      host_id: null
     };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (!this.state.host_id) {
+      this.setState({ host_id: parseInt(nextProps.host_id, 10) });
+    }
   }
 
   handleChange = ev => {
@@ -26,6 +33,7 @@ class NewExcursion extends React.Component {
   handleSubmit = ev => {
     ev.preventDefault();
     this.props.newExcursion(this.state, this.props.history);
+    this.props.getAllCities();
   };
 
   render() {
@@ -91,7 +99,7 @@ const mapStateToProps = state => {
   let cities = state.cities.map(city => {
     return { key: city.id, value: city.id, text: city.name };
   });
-  return { cities };
+  return { cities, host_id: state.currentUser.id };
 };
 
 export default withRouter(connect(mapStateToProps, actions)(NewExcursion));

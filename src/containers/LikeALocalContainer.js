@@ -7,7 +7,7 @@ import Login from "../components/Login";
 import Signup from "../components/Signup";
 import actions from "../actions";
 import { connect } from "react-redux";
-import { Button } from "semantic-ui-react";
+import { Button, Container } from "semantic-ui-react";
 
 class LikeALocalContainer extends React.Component {
   constructor(props) {
@@ -29,7 +29,7 @@ class LikeALocalContainer extends React.Component {
   };
   render() {
     return (
-      <div>
+      <Container>
         <NavBar isLoggedIn={this.props.isLoggedIn} />
         <Switch>
           <Route exact path="/login" component={Login} />
@@ -37,13 +37,7 @@ class LikeALocalContainer extends React.Component {
           <Route path="/cities" component={CitiesContainer} />
           <Route path="/excursions" component={ExcursionsContainer} />
         </Switch>
-        {this.props.isLoggedIn ? (
-          <div>
-            <Button onClick={this.handleNewExcursion}>New Excursion</Button>
-            <Button onClick={this.handleLogout}>Logout</Button>
-          </div>
-        ) : null}
-      </div>
+      </Container>
     );
   }
 }

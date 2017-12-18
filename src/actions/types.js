@@ -6,7 +6,6 @@ export const LOAD_LOGGED_IN_USER = "LOAD_LOGGED_IN_USER";
 
 //cities types
 export const GET_ALL_CITIES = "GET_ALL_CITIES";
-export const SELECT_CITY = "SELECT_CITY";
 
 //excursion types
 export const SET_EXCURSION = "SET_EXCURSION";

@@ -34,10 +34,6 @@ export const fetchAllCities = () => {
   return fetch(`${baseURL}/cities`, { headers }).then(res => res.json());
 };
 
-export const getCity = id => {
-  return fetch(`${baseURL}/cities/${id}`, { headers }).then(res => res.json());
-};
-
 export const postNewExcursion = data => {
   return fetch(`${baseURL}/excursions`, {
     method: "POST",

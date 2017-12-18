@@ -1,8 +1,6 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import { Card, Image } from "semantic-ui-react";
-import * as actions from "../actions/citiesActions";
-import { connect } from "react-redux";
 
 const CityIndexItem = props => {
   const handleClick = ev => {
@@ -18,4 +16,4 @@ const CityIndexItem = props => {
   );
 };
 
-export default withRouter(connect(null, actions)(CityIndexItem));
+export default withRouter(CityIndexItem);
