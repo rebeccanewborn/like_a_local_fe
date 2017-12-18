@@ -2,6 +2,7 @@ import React from "react";
 import { Form, Input, Button, Dropdown } from "semantic-ui-react";
 import * as actions from "../actions/excursionActions";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 
 class NewExcursion extends React.Component {
   constructor(props) {
@@ -24,7 +25,7 @@ class NewExcursion extends React.Component {
 
   handleSubmit = ev => {
     ev.preventDefault();
-    this.props.newExcursion(this.state);
+    this.props.newExcursion(this.state, this.props.history);
   };
 
   render() {
@@ -93,4 +94,4 @@ const mapStateToProps = state => {
   return { cities };
 };
 
-export default connect(mapStateToProps, actions)(NewExcursion);
+export default withRouter(connect(mapStateToProps, actions)(NewExcursion));

@@ -10,4 +10,4 @@ export const GET_ALL_CITIES = "GET_ALL_CITIES";
 export const SELECT_CITY = "SELECT_CITY";
 
 //excursion types
-export const NEW_EXCURSION = "NEW_EXCURSION";
+export const SET_EXCURSION = "SET_EXCURSION";

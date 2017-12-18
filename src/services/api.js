@@ -39,7 +39,11 @@ export const postNewExcursion = data => {
     method: "POST",
     body: JSON.stringify(data),
     headers
-  })
-    .then(res => res.json())
-    .then(json => console.log(json));
+  }).then(res => res.json());
+};
+
+export const getExcursion = id => {
+  return fetch(`${baseURL}/excursions/${id}`, { headers }).then(res =>
+    res.json()
+  );
 };
