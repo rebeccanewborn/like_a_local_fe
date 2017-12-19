@@ -1,19 +1,20 @@
 import {
   LOGIN_USER,
-  LOGIN_ERROR,
   LOGOUT_USER,
-  LOAD_LOGGED_IN_USER
+  LOAD_LOGGED_IN_USER,
+  LOGIN_ERROR,
+  SIGNUP_ERROR
 } from "./types.js";
 import { postNewUser, postAuthSession, getAuthSession } from "../services/api";
 
 export const signup = (data, history) => {
   return dispatch => {
-    postNewUser(data).then(json => {
-      if (!json.error) {
-        dispatch({ type: LOGIN_USER, payload: json });
-        history.push("/cities");
+    postNewUser(data).then(res => {
+      if (res.error) {
+        dispatch({ type: SIGNUP_ERROR, payload: res.error });
       } else {
-        console.log("json not ok", json.error);
+        dispatch({ type: LOGIN_USER, payload: res });
+        history.push("/cities");
       }
     });
   };
@@ -23,8 +24,9 @@ export const login = (email, password, history) => {
   return dispatch => {
     postAuthSession(email, password).then(res => {
       if (res.error) {
-        dispatch({ type: LOGIN_ERROR });
+        dispatch({ type: LOGIN_ERROR, payload: res.error });
       } else {
+        console.log(res);
         dispatch({ type: LOGIN_USER, payload: res });
         history.push("/cities");
       }
@@ -38,8 +40,9 @@ export const logout = () => {
 
 export const getCurrentUser = token => {
   return dispatch => {
-    getAuthSession(token).then(json =>
-      dispatch({ type: LOAD_LOGGED_IN_USER, payload: json })
-    );
+    getAuthSession(token).then(json => {
+      console.log(json);
+      dispatch({ type: LOAD_LOGGED_IN_USER, payload: json });
+    });
   };
 };

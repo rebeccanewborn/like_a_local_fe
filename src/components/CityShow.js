@@ -1,11 +1,12 @@
 import React from "react";
-import { Segment, Image } from "semantic-ui-react";
+import { Segment, Image, Grid } from "semantic-ui-react";
+import ExcursionListItem from "./ExcursionListItem";
 
 const CityShow = props => {
   let excursions;
   if (props.city.excursions) {
     excursions = props.city.excursions.map(excur => (
-      <li key={excur.created_at}>{excur.title}</li>
+      <ExcursionListItem key={excur.created_at} excursion={excur} />
     ));
   }
 
@@ -17,7 +18,9 @@ const CityShow = props => {
           style={{ width: "100%", height: "100%" }}
         />
       </Segment>
-      <ul>{excursions}</ul>
+      <Segment>
+        <Grid columns={1}>{excursions}</Grid>
+      </Segment>
     </div>
   );
 };

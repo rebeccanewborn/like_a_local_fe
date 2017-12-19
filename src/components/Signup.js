@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Input, Button, TextArea } from "semantic-ui-react";
+import { Form, Input, Button, TextArea, Message } from "semantic-ui-react";
 import * as actions from "../actions/userActions";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
@@ -24,9 +24,21 @@ class Signup extends React.Component {
     this.props.signup(this.state, this.props.history);
   };
 
+  handleErrors = () => {
+    let keys = Object.keys(this.props.errors);
+    if (keys.length > 0) {
+      let msgs = keys.map(key => <p>{`${key} ${this.props.errors[key]}`}</p>);
+      return <Message negative>{msgs}</Message>;
+    } else {
+      return <div>No Errors</div>;
+    }
+  };
+
   render() {
+    console.log("signup props", this.props);
     return (
       <div>
+        {this.handleErrors()}
         <Form onSubmit={this.handleSubmit}>
           <Form.Field>
             <label>Enter Your Full Name</label>
@@ -72,4 +84,8 @@ class Signup extends React.Component {
   }
 }
 
-export default withRouter(connect(null, actions)(Signup));
+const mapStateToProps = state => {
+  console.log(state);
+  return { errors: state.errors.signup };
+};
+export default withRouter(connect(mapStateToProps, actions)(Signup));

@@ -29,10 +29,8 @@ class Login extends React.Component {
   render() {
     return (
       <div>
-        {this.props.loginError ? (
-          <Message negative>
-            Invalid Login Credentials. Please Try Again.
-          </Message>
+        {this.props.errors ? (
+          <Message negative>{this.props.errors}</Message>
         ) : null}
         <Form onSubmit={this.handleSubmit}>
           <Form.Field>
@@ -61,4 +59,8 @@ class Login extends React.Component {
   }
 }
 
-export default withRouter(connect(null, actions)(Login));
+const mapStateToProps = state => {
+  return { errors: state.errors.login };
+};
+
+export default withRouter(connect(mapStateToProps, actions)(Login));

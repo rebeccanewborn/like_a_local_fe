@@ -47,3 +47,19 @@ export const getExcursion = id => {
     res.json()
   );
 };
+
+export const destroyExcursion = id => {
+  return fetch(`${baseURL}/excursions/${id}`, {
+    method: "DELETE",
+    headers
+  }).then(res => res.json());
+};
+
+export const postUserExcursion = (excursionId, userId) => {
+  console.log("signing user", userId, "up for excursion", excursionId);
+  return fetch(`${baseURL}/users/${userId}`, {
+    method: "PUT",
+    body: JSON.stringify({ excursion_id: excursionId }),
+    headers
+  }).then(res => res.json());
+};

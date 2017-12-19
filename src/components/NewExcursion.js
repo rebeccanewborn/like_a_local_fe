@@ -12,15 +12,8 @@ class NewExcursion extends React.Component {
       description: "",
       duration: "",
       price: "",
-      city_id: null,
-      host_id: null
+      city_id: null
     };
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (!this.state.host_id) {
-      this.setState({ host_id: parseInt(nextProps.host_id, 10) });
-    }
   }
 
   handleChange = ev => {
@@ -32,7 +25,8 @@ class NewExcursion extends React.Component {
 
   handleSubmit = ev => {
     ev.preventDefault();
-    this.props.newExcursion(this.state, this.props.history);
+    let data = { ...this.state, host_id: this.props.host_id };
+    this.props.newExcursion(data, this.props.history);
     this.props.getAllCities();
   };
 

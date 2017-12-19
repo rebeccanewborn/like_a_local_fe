@@ -1,5 +1,10 @@
-import { SET_EXCURSION } from "./types";
-import { postNewExcursion, getExcursion } from "../services/api";
+import { SET_EXCURSION, GET_ALL_CITIES } from "./types";
+import {
+  postNewExcursion,
+  getExcursion,
+  destroyExcursion,
+  postUserExcursion
+} from "../services/api";
 
 export const newExcursion = (data, history) => {
   return dispatch => {
@@ -13,6 +18,22 @@ export const newExcursion = (data, history) => {
 export const setCurrentExcursion = id => {
   return dispatch => {
     getExcursion(id).then(res => {
+      dispatch({ type: SET_EXCURSION, payload: res });
+    });
+  };
+};
+
+export const deleteExcursion = (id, history) => {
+  return dispatch => {
+    destroyExcursion(id).then(res => {
+      dispatch({ type: GET_ALL_CITIES, payload: res });
+      history.push("/cities");
+    });
+  };
+};
+export const excursionSignup = (id, userId) => {
+  return dispatch => {
+    postUserExcursion(id, userId).then(res => {
       dispatch({ type: SET_EXCURSION, payload: res });
     });
   };
