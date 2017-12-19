@@ -90,7 +90,7 @@ class NewExcursion extends React.Component {
 }
 
 const mapStateToProps = state => {
-  let cities = state.cities.map(city => {
+  let cities = state.allCities.map(city => {
     return { key: city.id, value: city.id, text: city.name };
   });
   return { cities, host_id: state.currentUser.id };

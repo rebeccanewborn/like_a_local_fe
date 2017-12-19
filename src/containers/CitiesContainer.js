@@ -7,14 +7,6 @@ import CitiesIndex from "../components/CitiesIndex";
 import CityShow from "../components/CityShow";
 
 class CitiesContainer extends React.Component {
-  index = () => this.props.location.pathname.slice(8);
-
-  renderShow = ({ match }) => {
-    let currentCity = this.props.cities.find(
-      city => city.id === parseInt(match.params.id, 10)
-    );
-    return currentCity ? <CityShow city={currentCity} /> : <Loader />;
-  };
   render() {
     return (
       <Switch>
@@ -23,7 +15,11 @@ class CitiesContainer extends React.Component {
           path="/cities"
           render={() => <CitiesIndex cities={this.props.cities} />}
         />
-        <Route exact path="/cities/:id" render={this.renderShow} />
+        <Route
+          exact
+          path="/cities/:id"
+          render={() => <CityShow city={this.props.currentCity} />}
+        />
       </Switch>
     );
   }
@@ -31,7 +27,8 @@ class CitiesContainer extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    cities: state.cities
+    cities: state.allCities,
+    currentCity: state.currentCity
   };
 };
 

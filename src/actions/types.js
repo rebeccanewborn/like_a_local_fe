@@ -9,6 +9,7 @@ export const SIGNUP_ERROR = "SIGNUP_ERROR";
 
 //cities action types
 export const GET_ALL_CITIES = "GET_ALL_CITIES";
+export const SET_CURRENT_CITY = "SET_CURRENT_CITY";
 
 //excursion action types
 export const SET_EXCURSION = "SET_EXCURSION";

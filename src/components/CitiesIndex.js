@@ -4,7 +4,7 @@ import { Grid, Header } from "semantic-ui-react";
 
 const CitiesIndex = props => {
   const cityIndexItems = props.cities.map(city => (
-    <Grid.Column>
+    <Grid.Column key={city.name}>
       <CityIndexItem key={city.name} city={city} />
     </Grid.Column>
   ));
@@ -20,13 +20,3 @@ const CitiesIndex = props => {
 };
 
 export default CitiesIndex;
-
-// function chunkArray(myArray, chunk_size){
-//     var results = [];
-//
-//     while (myArray.length) {
-//         results.push(myArray.splice(0, chunk_size));
-//     }
-//
-//     return results;
-// }

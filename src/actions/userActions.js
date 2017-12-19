@@ -40,9 +40,8 @@ export const logout = () => {
 
 export const getCurrentUser = token => {
   return dispatch => {
-    getAuthSession(token).then(json => {
-      console.log(json);
-      dispatch({ type: LOAD_LOGGED_IN_USER, payload: json });
+    getAuthSession(token).then(res => {
+      dispatch({ type: LOAD_LOGGED_IN_USER, payload: res });
     });
   };
 };
