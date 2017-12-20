@@ -7,10 +7,26 @@ const CityIndexItem = props => {
     props.history.push(`/cities/${props.city.id}`);
   };
   return (
-    <Card onClick={handleClick}>
+    <Card
+      onClick={handleClick}
+      style={{ height: "150px", width: "400px", margin: "20px" }}
+    >
+      <Image
+        src={props.city.image_url}
+        style={{ height: "100%", width: "100%" }}
+      />
       <Card.Content>
-        <Image src={props.city.image_url} size="small" />
-        <Card.Header>{props.city.name}</Card.Header>
+        <Card.Header
+          style={{
+            position: "absolute",
+            top: "50%",
+            bottom: "50%",
+            right: "5%",
+            color: "white"
+          }}
+        >
+          {props.city.name}
+        </Card.Header>
       </Card.Content>
     </Card>
   );

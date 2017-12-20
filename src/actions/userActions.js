@@ -26,7 +26,6 @@ export const login = (email, password, history) => {
       if (res.error) {
         dispatch({ type: LOGIN_ERROR, payload: res.error });
       } else {
-        console.log(res);
         dispatch({ type: LOGIN_USER, payload: res });
         history.push("/cities");
       }
