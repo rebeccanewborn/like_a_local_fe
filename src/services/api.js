@@ -59,11 +59,28 @@ export const destroyExcursion = id => {
   }).then(res => res.json());
 };
 
-export const postUserExcursion = (excursionId, userId) => {
-  console.log("signing user", userId, "up for excursion", excursionId);
-  return fetch(`${baseURL}/users/${userId}`, {
-    method: "PUT",
-    body: JSON.stringify({ excursion_id: excursionId }),
+export const postUserExcursion = (excursionOccurrenceId, userId) => {
+  return fetch(`${baseURL}/user_excursions`, {
+    method: "POST",
+    body: JSON.stringify({
+      excursion_occurrence_id: excursionOccurrenceId,
+      user_id: userId
+    }),
+    headers
+  }).then(res => res.json());
+};
+
+export const postExcursionOccurrence = data => {
+  return fetch(`${baseURL}/excursion_occurrences`, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(data)
+  }).then(res => res.json());
+};
+
+export const destroyExcursionOccurrence = id => {
+  return fetch(`${baseURL}/excursion_occurrences/${id}`, {
+    method: "DELETE",
     headers
   }).then(res => res.json());
 };

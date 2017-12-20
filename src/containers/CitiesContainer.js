@@ -2,7 +2,6 @@ import React from "react";
 import { withRouter, Switch, Route } from "react-router-dom";
 import * as actions from "../actions/citiesActions";
 import { connect } from "react-redux";
-import { Loader } from "semantic-ui-react";
 import CitiesIndex from "../components/CitiesIndex";
 import CityShow from "../components/CityShow";
 

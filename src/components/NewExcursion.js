@@ -1,5 +1,13 @@
 import React from "react";
-import { Form, Input, Button, Dropdown } from "semantic-ui-react";
+import {
+  Container,
+  Form,
+  Label,
+  Input,
+  TextArea,
+  Button,
+  Dropdown
+} from "semantic-ui-react";
 import actions from "../actions";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
@@ -25,14 +33,18 @@ class NewExcursion extends React.Component {
 
   handleSubmit = ev => {
     ev.preventDefault();
-    let data = { ...this.state, host_id: this.props.host_id };
+    let data = {
+      ...this.state,
+      host_id: this.props.host_id
+    };
+    debugger;
     this.props.newExcursion(data, this.props.history);
     this.props.getAllCities();
   };
 
   render() {
     return (
-      <div>
+      <Container>
         <Form onSubmit={this.handleSubmit}>
           <Form.Field>
             <label>Title</label>
@@ -45,11 +57,12 @@ class NewExcursion extends React.Component {
           </Form.Field>
           <Form.Field>
             <label>Description</label>
-            <Input
+            <TextArea
               type="text"
               name="description"
               value={this.state.description}
               onChange={this.handleChange}
+              style={{ minHeight: 100 }}
             />
           </Form.Field>
           <Form.Field>
@@ -60,7 +73,7 @@ class NewExcursion extends React.Component {
               search
               selection
               options={this.props.cities}
-              value={this.props.city_id}
+              value={this.state.city_id}
               onChange={this.handleDropdownChange}
             />
           </Form.Field>
@@ -69,6 +82,8 @@ class NewExcursion extends React.Component {
             <Input
               type="text"
               name="duration"
+              label={{ basic: true, content: "hours" }}
+              labelPosition="right"
               value={this.state.duration}
               onChange={this.handleChange}
             />
@@ -84,7 +99,7 @@ class NewExcursion extends React.Component {
           </Form.Field>
           <Button type="submit">Submit</Button>
         </Form>
-      </div>
+      </Container>
     );
   }
 }

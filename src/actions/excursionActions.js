@@ -3,7 +3,9 @@ import {
   postNewExcursion,
   getExcursion,
   destroyExcursion,
-  postUserExcursion
+  postUserExcursion,
+  postExcursionOccurrence,
+  destroyExcursionOccurrence
 } from "../services/api";
 
 export const newExcursion = (data, history) => {
@@ -31,9 +33,26 @@ export const deleteExcursion = (id, history) => {
     });
   };
 };
-export const excursionSignup = (id, userId) => {
+
+export const excursionSignup = (excursionOccurrenceId, userId) => {
   return dispatch => {
-    postUserExcursion(id, userId).then(res => {
+    postUserExcursion(excursionOccurrenceId, userId).then(res => {
+      dispatch({ type: SET_EXCURSION, payload: res });
+    });
+  };
+};
+
+export const newExcursionOccurrence = data => {
+  return dispatch => {
+    postExcursionOccurrence(data).then(res => {
+      dispatch({ type: SET_EXCURSION, payload: res });
+    });
+  };
+};
+
+export const deleteExcursionOccurrence = id => {
+  return dispatch => {
+    destroyExcursionOccurrence(id).then(res => {
       dispatch({ type: SET_EXCURSION, payload: res });
     });
   };

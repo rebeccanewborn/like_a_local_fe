@@ -7,7 +7,7 @@ import Login from "../components/Login";
 import Signup from "../components/Signup";
 import actions from "../actions";
 import { connect } from "react-redux";
-import { Button, Container } from "semantic-ui-react";
+import { Container } from "semantic-ui-react";
 
 class LikeALocalContainer extends React.Component {
   constructor(props) {

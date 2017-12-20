@@ -2,7 +2,7 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import actions from "../actions";
-import { Container, Menu, Button } from "semantic-ui-react";
+import { Container, Menu } from "semantic-ui-react";
 
 const NavBar = props => {
   const handleLogout = ev => {

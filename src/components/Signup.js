@@ -30,12 +30,11 @@ class Signup extends React.Component {
       let msgs = keys.map(key => <p>{`${key} ${this.props.errors[key]}`}</p>);
       return <Message negative>{msgs}</Message>;
     } else {
-      return <div>No Errors</div>;
+      return null;
     }
   };
 
   render() {
-    console.log("signup props", this.props);
     return (
       <div>
         {this.handleErrors()}
@@ -85,7 +84,6 @@ class Signup extends React.Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state);
   return { errors: state.errors.signup };
 };
 export default withRouter(connect(mapStateToProps, actions)(Signup));
