@@ -68,10 +68,7 @@ const OccurrenceCard = props => {
 const mapStateToProps = state => {
   return {
     isHost: state.currentUser.id === state.currentExcursion.host_id,
-    currentUserId: state.currentUser.id,
-    currentUserExcursions: state.currentUser.excursion_occurrences.map(
-      exocc => exocc.id
-    )
+    currentUserId: state.currentUser.id
   };
 };
 
