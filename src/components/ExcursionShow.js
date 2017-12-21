@@ -1,7 +1,7 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { Header, Button, Card, Segment } from "semantic-ui-react";
+import { Message, Header, Button, Card, Segment } from "semantic-ui-react";
 import OccurrenceCard from "./OccurrenceCard";
 import AddExcursionOccurrence from "./AddExcursionOccurrence";
 import * as actions from "../actions/excursionActions";
@@ -14,19 +14,23 @@ const ExcursionShow = props => {
   let occurrences;
   if (props.excursion.excursion_occurrences) {
     occurrences = props.excursion.excursion_occurrences.map(occ => (
-      <OccurrenceCard key={occ.created_at} occurrence={occ} />
+      <OccurrenceCard key={occ.id} occurrence={occ} />
     ));
   }
 
   return (
     <div>
+      {props.errors ? <Message negative>{props.errors}</Message> : null}
       <Header as="h1">{props.excursion.title}</Header>
       <Header as="h3">{props.excursion.description}</Header>
       <Header as="h3">Hosted by: {props.excursion.host_name}</Header>
       <Header as="h4">Duration: {props.excursion.duration} hours</Header>
       <Header as="h4">Price: {props.excursion.price}</Header>
       <Segment compact>
-        <Card.Group itemsPerRow={1}>{occurrences}</Card.Group>
+        {props.excursion.excursion_occurrences &&
+        props.excursion.excursion_occurrences.length > 0 ? (
+          <Card.Group itemsPerRow={1}>{occurrences}</Card.Group>
+        ) : null}
       </Segment>
       <br />
       {props.isHost ? (
@@ -45,7 +49,8 @@ const ExcursionShow = props => {
 const mapStateToProps = state => {
   return {
     isHost: state.currentUser.id === state.currentExcursion.host_id,
-    currentUserId: state.currentUser.id
+    currentUserId: state.currentUser.id,
+    errors: state.errors.excursionSignup
   };
 };
 export default withRouter(connect(mapStateToProps, actions)(ExcursionShow));

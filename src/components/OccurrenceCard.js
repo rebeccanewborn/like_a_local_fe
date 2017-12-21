@@ -15,6 +15,12 @@ const OccurrenceCard = props => {
     minute: "numeric"
   };
 
+  // let showAttendees = false;
+
+  const attendeeNames = props.occurrence.users.map(user => (
+    <p key={user.name}>{user.name}</p>
+  ));
+
   const handleSignup = ev => {
     props.excursionSignup(props.occurrence.id, props.currentUserId);
   };
@@ -38,6 +44,15 @@ const OccurrenceCard = props => {
             </Button>
           )}
         </Card.Header>
+
+        {props.isHost ? (
+          <Card.Meta>{attendeeNames}</Card.Meta>
+        ) : (
+          <Card.Meta>
+            There are {props.occurrence.users.length} people attending this
+            excursion
+          </Card.Meta>
+        )}
       </Card.Content>
     </Card>
   );

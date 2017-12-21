@@ -3,7 +3,8 @@ import {
   LOGOUT_USER,
   LOAD_LOGGED_IN_USER,
   LOGIN_ERROR,
-  SIGNUP_ERROR
+  SIGNUP_ERROR,
+  CLEAR_USER_ERRORS
 } from "./types.js";
 import { postNewUser, postAuthSession, getAuthSession } from "../services/api";
 
@@ -14,6 +15,7 @@ export const signup = (data, history) => {
         dispatch({ type: SIGNUP_ERROR, payload: res.error });
       } else {
         dispatch({ type: LOGIN_USER, payload: res });
+        dispatch({ type: CLEAR_USER_ERRORS });
         history.push("/cities");
       }
     });
@@ -27,6 +29,7 @@ export const login = (email, password, history) => {
         dispatch({ type: LOGIN_ERROR, payload: res.error });
       } else {
         dispatch({ type: LOGIN_USER, payload: res });
+        dispatch({ type: CLEAR_USER_ERRORS });
         history.push("/cities");
       }
     });
