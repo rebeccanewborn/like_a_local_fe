@@ -15,8 +15,6 @@ const OccurrenceCard = props => {
     minute: "numeric"
   };
 
-  // let showAttendees = false;
-
   const attendeeNames = props.occurrence.users.map(user => (
     <p key={user.name}>{user.name}</p>
   ));
@@ -65,6 +63,7 @@ const OccurrenceCard = props => {
     </Card>
   );
 };
+
 const mapStateToProps = state => {
   return {
     isHost: state.currentUser.id === state.currentExcursion.host_id,

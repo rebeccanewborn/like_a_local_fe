@@ -1,7 +1,7 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { Message, Header, Button, Card, Segment } from "semantic-ui-react";
+import { Header, Button, Card, Segment } from "semantic-ui-react";
 import OccurrenceCard from "./OccurrenceCard";
 import AddExcursionOccurrence from "./AddExcursionOccurrence";
 import * as actions from "../actions/excursionActions";
@@ -27,7 +27,6 @@ const ExcursionShow = props => {
 
   return (
     <div>
-      {props.errors ? <Message negative>{props.errors}</Message> : null}
       <Header as="h1">{props.excursion.title}</Header>
       <Header as="h3">{props.excursion.description}</Header>
       <Header as="h3">Hosted by: {props.excursion.host_name}</Header>
@@ -56,8 +55,7 @@ const ExcursionShow = props => {
 const mapStateToProps = state => {
   return {
     isHost: state.currentUser.id === state.currentExcursion.host_id,
-    currentUserId: state.currentUser.id,
-    errors: state.errors.excursionSignup
+    currentUserId: state.currentUser.id
   };
 };
 

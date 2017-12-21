@@ -36,7 +36,6 @@ class NewExcursion extends React.Component {
       ...this.state,
       host_id: this.props.host_id
     };
-    debugger;
     this.props.newExcursion(data, this.props.history);
     this.props.getAllCities();
   };
