@@ -70,6 +70,17 @@ export const postUserExcursion = (excursionOccurrenceId, userId) => {
   }).then(res => res.json());
 };
 
+export const destroyUserExcursion = (excursionOccurrenceId, userId) => {
+  return fetch(`${baseURL}/dropout`, {
+    method: "DELETE",
+    body: JSON.stringify({
+      excursion_occurrence_id: excursionOccurrenceId,
+      user_id: userId
+    }),
+    headers
+  }).then(res => res.json());
+};
+
 export const postExcursionOccurrence = data => {
   return fetch(`${baseURL}/excursion_occurrences`, {
     method: "POST",

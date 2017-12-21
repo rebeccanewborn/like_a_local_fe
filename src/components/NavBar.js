@@ -13,9 +13,14 @@ const NavBar = props => {
   return (
     <Container>
       <Menu pointing secondary fluid style={{ borderStyle: "none" }}>
-        <Menu.Item onClick={() => props.history.push("/cities")}>
-          Home
-        </Menu.Item>
+        <Menu.Menu position="left">
+          <Menu.Item onClick={() => props.history.push("/cities")}>
+            Home
+          </Menu.Item>
+          {props.name ? (
+            <Menu.Item>Welcome, {props.name.split(" ")[0]}</Menu.Item>
+          ) : null}
+        </Menu.Menu>
 
         {props.isLoggedIn ? (
           <Menu.Menu position="right">
@@ -40,7 +45,7 @@ const NavBar = props => {
 };
 
 const mapStateToProps = state => {
-  return {};
+  return { name: state.currentUser.name };
 };
 
 export default withRouter(connect(mapStateToProps, actions)(NavBar));

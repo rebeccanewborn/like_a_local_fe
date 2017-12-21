@@ -25,6 +25,10 @@ const OccurrenceCard = props => {
     props.excursionSignup(props.occurrence.id, props.currentUserId);
   };
 
+  const handleUnSignup = ev => {
+    props.excursionDropout(props.occurrence.id, props.currentUserId);
+  };
+
   const handleDelete = ev => {
     props.deleteExcursionOccurrence(props.occurrence.id);
   };
@@ -38,9 +42,13 @@ const OccurrenceCard = props => {
             <Button basic color="red" floated="right" onClick={handleDelete}>
               Delete
             </Button>
-          ) : (
+          ) : !props.currentUserAttending ? (
             <Button basic floated="right" onClick={handleSignup}>
               Sign Up
+            </Button>
+          ) : (
+            <Button basic floated="right" onClick={handleUnSignup}>
+              Drop Out
             </Button>
           )}
         </Card.Header>
@@ -60,7 +68,10 @@ const OccurrenceCard = props => {
 const mapStateToProps = state => {
   return {
     isHost: state.currentUser.id === state.currentExcursion.host_id,
-    currentUserId: state.currentUser.id
+    currentUserId: state.currentUser.id,
+    currentUserExcursions: state.currentUser.excursion_occurrences.map(
+      exocc => exocc.id
+    )
   };
 };
 

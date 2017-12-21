@@ -13,9 +13,16 @@ const ExcursionShow = props => {
 
   let occurrences;
   if (props.excursion.excursion_occurrences) {
-    occurrences = props.excursion.excursion_occurrences.map(occ => (
-      <OccurrenceCard key={occ.id} occurrence={occ} />
-    ));
+    occurrences = props.excursion.excursion_occurrences.map(occ => {
+      let attendeeIds = occ.users.map(user => user.id);
+      return (
+        <OccurrenceCard
+          key={occ.id}
+          occurrence={occ}
+          currentUserAttending={attendeeIds.includes(props.currentUserId)}
+        />
+      );
+    });
   }
 
   return (
@@ -53,13 +60,5 @@ const mapStateToProps = state => {
     errors: state.errors.excursionSignup
   };
 };
+
 export default withRouter(connect(mapStateToProps, actions)(ExcursionShow));
-
-//{props.excursion.users ? <ul>{attendees}</ul> : null}
-
-// let attendees;
-// if (props.excursion.users) {
-//   attendees = props.excursion.users.map(user => (
-//     <li key={user.created_at}>{user.name}</li>
-//   ));
-// }
