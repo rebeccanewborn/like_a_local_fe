@@ -1,6 +1,6 @@
 import { LOGIN_ERROR, SIGNUP_ERROR, CLEAR_USER_ERRORS } from "../actions/types";
 
-const errors = { login: null, signup: {}, excursionSignup: null };
+const errors = { login: null, signup: {} };
 
 export const errorsReducer = (state = errors, action) => {
   switch (action.type) {

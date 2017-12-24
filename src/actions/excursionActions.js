@@ -20,9 +20,11 @@ export const newExcursion = (data, history) => {
 
 export const setCurrentExcursion = id => {
   return dispatch => {
-    getExcursion(id).then(res => {
-      dispatch({ type: SET_EXCURSION, payload: res });
-    });
+    getExcursion(id)
+      .then(res => {
+        dispatch({ type: SET_EXCURSION, payload: res });
+      })
+      .catch(err => console.log(err));
   };
 };
 

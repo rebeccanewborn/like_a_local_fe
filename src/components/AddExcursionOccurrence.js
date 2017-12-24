@@ -13,9 +13,9 @@ class AddExcursionOccurrence extends React.Component {
     };
   }
 
-  handleChange = time => {
+  handleChange = event => {
     this.setState({
-      time: time._d
+      time: event._d
     });
   };
 
