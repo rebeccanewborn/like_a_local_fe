@@ -8,7 +8,6 @@ import AddExcursionOccurrence from "./AddExcursionOccurrence";
 import * as actions from "../actions/excursionActions";
 
 const ExcursionShow = props => {
-  console.log(props.excursion);
   const handleDelete = ev => {
     props.deleteExcursion(props.excursion.id, props.history);
   };
