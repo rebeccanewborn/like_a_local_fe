@@ -10,7 +10,7 @@ const CitiesIndex = props => {
   ));
 
   return (
-    <Grid>
+    <Grid centered>
       <Grid.Row centered>
         <Header as="h1">Browse Cities</Header>
       </Grid.Row>

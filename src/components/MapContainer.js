@@ -4,6 +4,7 @@ import { GoogleApiWrapper, Map, Marker, InfoWindow } from "google-maps-react";
 
 class MapContainer extends React.Component {
   render() {
+    console.log(this.props.coordinates);
     return this.props.coordinates.lat ? (
       <Segment
         loading={!this.props.loaded}

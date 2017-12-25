@@ -1,7 +1,7 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { Header, Button, Card, Segment } from "semantic-ui-react";
+import { Header, Button, Card, Segment, Modal } from "semantic-ui-react";
 import MapContainer from "./MapContainer";
 import OccurrenceCard from "./OccurrenceCard";
 import AddExcursionOccurrence from "./AddExcursionOccurrence";
@@ -34,14 +34,18 @@ const ExcursionShow = props => {
       <Header as="h3">Hosted by: {props.excursion.host_name}</Header>
       <Header as="h4">Duration: {props.excursion.duration} hours</Header>
       <Header as="h4">Price: {props.excursion.price}</Header>
-      <Header as="h4">Where you will meet</Header>
+      <Header as="h4">Where you will meet: {props.excursion.address}</Header>
+      {props.excursion.excursion_occurrences &&
+      props.excursion.excursion_occurrences.length > 0 ? (
+        <Modal trigger={<Button>When do you want to go?</Button>}>
+          <Modal.Header>Occurrences</Modal.Header>
+          <Modal.Content>
+            <Card.Group itemsPerRow={1}>{occurrences}</Card.Group>
+          </Modal.Content>
+        </Modal>
+      ) : null}
+      <br />
       <MapContainer coordinates={coordinates} />
-      <Segment compact>
-        {props.excursion.excursion_occurrences &&
-        props.excursion.excursion_occurrences.length > 0 ? (
-          <Card.Group itemsPerRow={1}>{occurrences}</Card.Group>
-        ) : null}
-      </Segment>
       <br />
       {props.isHost ? (
         <div>
