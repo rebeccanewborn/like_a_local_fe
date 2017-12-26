@@ -31,10 +31,11 @@ class ExcursionShow extends React.Component {
         );
       });
     }
-    const coordinates = {
+    let coordinates = {
       lat: this.props.excursion.lat,
       lng: this.props.excursion.lng
     };
+    // console.log("excursion show props", this.props.excursion, coordinates);
 
     return (
       <div>
@@ -46,7 +47,7 @@ class ExcursionShow extends React.Component {
         <Header as="h4">
           Where you will meet: {this.props.excursion.address}
         </Header>
-        <MapContainer coordinates={coordinates} />
+        <MapContainer coordinates={this.props.coordinates} />
 
         {this.props.excursion.excursion_occurrences &&
         this.props.excursion.excursion_occurrences.length > 0 ? (

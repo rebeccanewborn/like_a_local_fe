@@ -15,7 +15,6 @@ class LikeALocalContainer extends React.Component {
   componentDidMount() {
     this.props.getAllCities();
   }
-
   render() {
     return (
       <Container>
@@ -36,9 +35,15 @@ class LikeALocalContainer extends React.Component {
           <Route path="/excursions/new" component={NewExcursion} />
           <Route
             path="/excursions/:id"
-            render={() => (
-              <ExcursionShow excursion={this.props.currentExcursion} />
-            )}
+            render={() => {
+              console.log("like a local props", this.props);
+              return (
+                <ExcursionShow
+                  excursion={this.props.currentExcursion}
+                  coordinates={this.props.coordinates}
+                />
+              );
+            }}
           />
         </Switch>
       </Container>
@@ -51,7 +56,11 @@ const mapStateToProps = state => {
     isLoggedIn: !!state.currentUser.email,
     cities: state.allCities,
     currentCity: state.currentCity,
-    currentExcursion: state.currentExcursion
+    currentExcursion: state.currentExcursion,
+    coordinates: {
+      lat: state.currentExcursion.lat,
+      lng: state.currentExcursion.lng
+    }
   };
 };
 export default withRouter(

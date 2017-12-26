@@ -3,8 +3,19 @@ import { Segment, Loader } from "semantic-ui-react";
 import { GoogleApiWrapper, Map, Marker, InfoWindow } from "google-maps-react";
 
 class MapContainer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      coordinates: {}
+    };
+  }
+  componentDidMount() {
+    this.setState({ coordinates: this.props.coordinates });
+  }
+
   render() {
-    return this.props.coordinates.lat ? (
+    console.log("map rendering", this.state.coordinates);
+    return this.state.coordinates.lat ? (
       <Segment
         loading={!this.props.loaded}
         style={{
@@ -16,7 +27,7 @@ class MapContainer extends React.Component {
         <Map
           style={{ width: "97.5%", height: "95.5%", position: "relative" }}
           google={this.props.google}
-          initialCenter={this.props.coordinates}
+          initialCenter={this.state.coordinates}
           zoom={16}
         >
           <Marker position={this.props.coordinates} />
