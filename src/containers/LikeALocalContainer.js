@@ -1,7 +1,9 @@
 import React from "react";
 import { withRouter, Switch, Route } from "react-router-dom";
-import CitiesContainer from "./CitiesContainer";
-import ExcursionsContainer from "./ExcursionsContainer";
+import CitiesIndex from "../components/CitiesIndex";
+import CityShow from "../components/CityShow";
+import NewExcursion from "../components/NewExcursion";
+import ExcursionShow from "../components/ExcursionShow";
 import NavBar from "../components/NavBar";
 import Login from "../components/Login";
 import Signup from "../components/Signup";
@@ -10,23 +12,10 @@ import { connect } from "react-redux";
 import { Container } from "semantic-ui-react";
 
 class LikeALocalContainer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleLogout = this.handleLogout.bind(this);
-  }
-
   componentDidMount() {
     this.props.getAllCities();
   }
 
-  handleNewExcursion = ev => {
-    this.props.history.push("/excursions/new");
-  };
-
-  handleLogout = ev => {
-    this.props.history.push("/login");
-    this.props.logout();
-  };
   render() {
     return (
       <Container>
@@ -34,8 +23,23 @@ class LikeALocalContainer extends React.Component {
         <Switch>
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={Signup} />
-          <Route path="/cities" component={CitiesContainer} />
-          <Route path="/excursions" component={ExcursionsContainer} />
+          <Route
+            exact
+            path="/cities"
+            render={() => <CitiesIndex cities={this.props.cities} />}
+          />
+          <Route
+            exact
+            path="/cities/:id"
+            render={() => <CityShow city={this.props.currentCity} />}
+          />
+          <Route path="/excursions/new" component={NewExcursion} />
+          <Route
+            path="/excursions/:id"
+            render={() => (
+              <ExcursionShow excursion={this.props.currentExcursion} />
+            )}
+          />
         </Switch>
       </Container>
     );
@@ -43,7 +47,12 @@ class LikeALocalContainer extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return { isLoggedIn: !!state.currentUser.email };
+  return {
+    isLoggedIn: !!state.currentUser.email,
+    cities: state.allCities,
+    currentCity: state.currentCity,
+    currentExcursion: state.currentExcursion
+  };
 };
 export default withRouter(
   connect(mapStateToProps, actions)(LikeALocalContainer)

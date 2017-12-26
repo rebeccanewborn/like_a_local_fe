@@ -7,54 +7,66 @@ import OccurrenceCard from "./OccurrenceCard";
 import AddExcursionOccurrence from "./AddExcursionOccurrence";
 import * as actions from "../actions/excursionActions";
 
-const ExcursionShow = props => {
-  const handleDelete = ev => {
-    props.deleteExcursion(props.excursion.id, props.history);
+class ExcursionShow extends React.Component {
+  componentDidMount() {
+    this.props.setCurrentExcursion(this.props.match.params.id);
+  }
+  handleDelete = ev => {
+    this.props.deleteExcursion(this.props.excursion.id, this.props.history);
   };
 
-  let occurrences;
-  if (props.excursion.excursion_occurrences) {
-    occurrences = props.excursion.excursion_occurrences.map(occ => {
-      let attendeeIds = occ.users.map(user => user.id);
-      return (
-        <OccurrenceCard
-          key={occ.id}
-          occurrence={occ}
-          currentUserAttending={attendeeIds.includes(props.currentUserId)}
-        />
-      );
-    });
-  }
-  const coordinates = { lat: props.excursion.lat, lng: props.excursion.lng };
-
-  return (
-    <div>
-      <Header as="h1">{props.excursion.title}</Header>
-      <Header as="h3">{props.excursion.description}</Header>
-      <Header as="h3">Hosted by: {props.excursion.host_name}</Header>
-      <Header as="h4">Duration: {props.excursion.duration} hours</Header>
-      <Header as="h4">Price: {props.excursion.price}</Header>
-      <Header as="h4">Where you will meet</Header>
-      <MapContainer coordinates={coordinates} />
-      <Segment compact>
-        {props.excursion.excursion_occurrences &&
-        props.excursion.excursion_occurrences.length > 0 ? (
-          <Card.Group itemsPerRow={1}>{occurrences}</Card.Group>
-        ) : null}
-      </Segment>
-      <br />
-      {props.isHost ? (
-        <div>
-          <AddExcursionOccurrence
-            excursion_id={props.excursion.id}
-            duration={props.excursion.duration}
+  render() {
+    let occurrences;
+    if (this.props.excursion.excursion_occurrences) {
+      occurrences = this.props.excursion.excursion_occurrences.map(occ => {
+        let attendeeIds = occ.users.map(user => user.id);
+        return (
+          <OccurrenceCard
+            key={occ.id}
+            occurrence={occ}
+            currentUserAttending={attendeeIds.includes(
+              this.props.currentUserId
+            )}
           />
-          <Button onClick={handleDelete}>Delete this Excursion</Button>
-        </div>
-      ) : null}
-    </div>
-  );
-};
+        );
+      });
+    }
+    const coordinates = {
+      lat: this.props.excursion.lat,
+      lng: this.props.excursion.lng
+    };
+
+    return (
+      <div>
+        <Header as="h1">{this.props.excursion.title}</Header>
+        <Header as="h3">{this.props.excursion.description}</Header>
+        <Header as="h3">Hosted by: {this.props.excursion.host_name}</Header>
+        <Header as="h4">Duration: {this.props.excursion.duration} hours</Header>
+        <Header as="h4">Price: {this.props.excursion.price}</Header>
+        <Header as="h4">
+          Where you will meet: {this.props.excursion.address}
+        </Header>
+        <MapContainer coordinates={coordinates} />
+        <Segment compact>
+          {this.props.excursion.excursion_occurrences &&
+          this.props.excursion.excursion_occurrences.length > 0 ? (
+            <Card.Group itemsPerRow={1}>{occurrences}</Card.Group>
+          ) : null}
+        </Segment>
+        <br />
+        {this.props.isHost ? (
+          <div>
+            <AddExcursionOccurrence
+              excursion_id={this.props.excursion.id}
+              duration={this.props.excursion.duration}
+            />
+            <Button onClick={this.handleDelete}>Delete this Excursion</Button>
+          </div>
+        ) : null}
+      </div>
+    );
+  }
+}
 
 const mapStateToProps = state => {
   return {
@@ -63,7 +75,7 @@ const mapStateToProps = state => {
   };
 };
 /*
-<MapContainer coordinates={coordinates} name={props.excursion.address} />
+<MapContainer coordinates={coordinates} name={this.props.excursion.address} />
 */
 
 export default withRouter(connect(mapStateToProps, actions)(ExcursionShow));
