@@ -1,4 +1,8 @@
-import { SET_EXCURSION, GET_ALL_CITIES } from "./types";
+import {
+  SET_EXCURSION,
+  GET_ALL_CITIES,
+  CLEAR_CURRENT_EXCURSION
+} from "./types";
 import {
   postNewExcursion,
   getExcursion,
@@ -26,6 +30,10 @@ export const setCurrentExcursion = id => {
       })
       .catch(err => console.log(err));
   };
+};
+
+export const clearCurrentExcursion = () => {
+  return { type: CLEAR_CURRENT_EXCURSION };
 };
 
 export const deleteExcursion = (id, history) => {

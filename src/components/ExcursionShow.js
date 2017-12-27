@@ -38,33 +38,43 @@ class ExcursionShow extends React.Component {
 
     return (
       <div>
-        <Header as="h1">{props.excursion.title}</Header>
-        <Header as="h3">{props.excursion.description}</Header>
-        <Header as="h3">Hosted by: {props.excursion.host_name}</Header>
-        <Header as="h4">Duration: {props.excursion.duration} hours</Header>
-        <Header as="h4">Price: {props.excursion.price}</Header>
-        <Header as="h4">Where you will meet: {props.excursion.address}</Header>
-        {props.excursion.excursion_occurrences &&
-        props.excursion.excursion_occurrences.length > 0 ? (
-          <Modal trigger={<Button>When do you want to go?</Button>}>
+        <Header as="h1">{this.props.excursion.title}</Header>
+        <Header as="h3">{this.props.excursion.description}</Header>
+        <Header as="h3">Hosted by: {this.props.excursion.host_name}</Header>
+        <Header as="h4">Duration: {this.props.excursion.duration} hours</Header>
+        <Header as="h4">Price: {this.props.excursion.price}</Header>
+
+        {this.props.excursion.excursion_occurrences &&
+        this.props.excursion.excursion_occurrences.length > 0 ? (
+          <Modal
+            trigger={
+              <Button>
+                {this.props.isHost
+                  ? "Manage timeslots"
+                  : "When do you want to go?"}
+              </Button>
+            }
+          >
             <Modal.Header>Occurrences</Modal.Header>
             <Modal.Content>
               <Card.Group itemsPerRow={1}>{occurrences}</Card.Group>
             </Modal.Content>
           </Modal>
         ) : null}
-        <br />
-        <MapContainer coordinates={coordinates} />
-        <br />
-        {props.isHost ? (
+        {this.props.isHost ? (
           <div>
             <AddExcursionOccurrence
-              excursion_id={props.excursion.id}
-              duration={props.excursion.duration}
+              excursion_id={this.props.excursion.id}
+              duration={this.props.excursion.duration}
             />
-            <Button onClick={handleDelete}>Delete this Excursion</Button>
+            <Button onClick={this.handleDelete}>Delete this Excursion</Button>
           </div>
         ) : null}
+        <br />
+        <Header as="h4">
+          Where you will meet: {this.props.excursion.address}
+        </Header>
+        <MapContainer coordinates={coordinates} />
       </div>
     );
   }

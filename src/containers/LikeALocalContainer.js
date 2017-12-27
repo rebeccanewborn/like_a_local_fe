@@ -36,7 +36,6 @@ class LikeALocalContainer extends React.Component {
           <Route
             path="/excursions/:id"
             render={() => {
-              console.log("like a local props", this.props);
               return (
                 <ExcursionShow
                   excursion={this.props.currentExcursion}

@@ -32,8 +32,11 @@ class AddExcursionOccurrence extends React.Component {
       <Segment color="red" compact>
         <Header as="h4">Duration: {this.props.duration} hours</Header>
         <Form onSubmit={this.handleSubmit}>
-          <Datetime onChange={this.handleChange} />
-          <Button type="submit">Add a Timeslot for this Excursion</Button>
+          <Datetime
+            onChange={this.handleChange}
+            placeholder={"Click here to select a date and time"}
+          />
+          <Button type="submit">Add Timeslot</Button>
         </Form>
       </Segment>
     );

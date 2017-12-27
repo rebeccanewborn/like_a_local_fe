@@ -14,3 +14,4 @@ export const SET_CURRENT_CITY = "SET_CURRENT_CITY";
 
 //excursion action types
 export const SET_EXCURSION = "SET_EXCURSION";
+export const CLEAR_CURRENT_EXCURSION = "CLEAR_CURRENT_EXCURSION";

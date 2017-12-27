@@ -16,7 +16,7 @@ class MapContainer extends React.Component {
         <Map
           style={{ width: "97.5%", height: "95.5%", position: "relative" }}
           google={this.props.google}
-          initialCenter={this.state.coordinates}
+          initialCenter={this.props.coordinates}
           zoom={16}
         >
           <Marker position={this.props.coordinates} />
