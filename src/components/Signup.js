@@ -1,6 +1,7 @@
 import React from "react";
 import { Form, Input, Button, TextArea, Message } from "semantic-ui-react";
 import Dropzone from "react-dropzone";
+import DropzoneComponent from "react-dropzone-component";
 import * as actions from "../actions/userActions";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
@@ -36,28 +37,16 @@ class Signup extends React.Component {
     }
   };
 
-  onDrop = (acceptedFiles, rejectedFiles) => {
+  onDrop = file => {
     let reader = new FileReader();
     reader.onload = () => {
       let fileAsDataURL = reader.result;
       this.setState({ avatar_base64: fileAsDataURL });
     };
-    reader.onabort = () => {
-      console.log("aborting");
-    };
-    reader.onerror = () => {
-      console.log("erroring");
-    };
-
-    reader.readAsDataURL(acceptedFiles[0]);
+    reader.readAsDataURL(file);
   };
 
   render() {
-    // let componentConfig = {
-    //   iconFiletypes: [".jpg", ".png", ".gif"],
-    //   showFiletypeIcon: true,
-    //   postUrl: "no-url"
-    // };
     return (
       <div>
         {this.handleErrors()}
@@ -73,12 +62,18 @@ class Signup extends React.Component {
           </Form.Field>
           <Form.Field>
             <label>Upload an avatar</label>
-            <Dropzone accept="image/*" onDrop={this.onDrop}>
+            <DropzoneComponent
+              config={{
+                iconFiletypes: [".jpg", ".png", ".gif"],
+                postUrl: "/"
+              }}
+              eventHandlers={{ addedfile: this.onDrop }}
+            >
               <div>
                 Try dropping some files here, or click to select files to
                 upload.
               </div>
-            </Dropzone>
+            </DropzoneComponent>
           </Form.Field>
           <Form.Field>
             <label>Tell Us About Yourself</label>

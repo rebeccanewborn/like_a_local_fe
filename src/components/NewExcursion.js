@@ -139,15 +139,7 @@ class NewExcursion extends React.Component {
               />
             </div>
           ) : null}
-          <Form.Field>
-            <label>Add images</label>
-            <Dropzone accept="image/*" onDrop={this.onDrop}>
-              <div>
-                Try dropping some files here, or click to select files to
-                upload.
-              </div>
-            </Dropzone>
-          </Form.Field>
+
           <Button type="submit">Submit</Button>
         </Form>
         <br />
@@ -155,6 +147,18 @@ class NewExcursion extends React.Component {
     );
   }
 }
+
+/*
+<Form.Field>
+  <label>Add images</label>
+  <Dropzone accept="image/*" onDrop={this.onDrop}>
+    <div>
+      Try dropping some files here, or click to select files to
+      upload.
+    </div>
+  </Dropzone>
+</Form.Field>
+*/
 
 const mapStateToProps = state => {
   let cities = state.allCities.map(city => {

@@ -1,7 +1,7 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { Header, Button, Card, Segment, Modal } from "semantic-ui-react";
+import { Header, Button, Card, Modal } from "semantic-ui-react";
 import MapContainer from "./MapContainer";
 import OccurrenceCard from "./OccurrenceCard";
 import AddExcursionOccurrence from "./AddExcursionOccurrence";
