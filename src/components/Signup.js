@@ -53,11 +53,11 @@ class Signup extends React.Component {
   };
 
   render() {
-    let componentConfig = {
-      iconFiletypes: [".jpg", ".png", ".gif"],
-      showFiletypeIcon: true,
-      postUrl: "no-url"
-    };
+    // let componentConfig = {
+    //   iconFiletypes: [".jpg", ".png", ".gif"],
+    //   showFiletypeIcon: true,
+    //   postUrl: "no-url"
+    // };
     return (
       <div>
         {this.handleErrors()}
