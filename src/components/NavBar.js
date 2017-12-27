@@ -18,7 +18,13 @@ const NavBar = props => {
             Home
           </Menu.Item>
           {props.name ? (
-            <Menu.Item>Welcome, {props.name.split(" ")[0]}</Menu.Item>
+            <Menu.Item
+              onClick={() => {
+                props.history.push("/my+profile");
+              }}
+            >
+              Welcome, {props.name.split(" ")[0]}
+            </Menu.Item>
           ) : null}
         </Menu.Menu>
 

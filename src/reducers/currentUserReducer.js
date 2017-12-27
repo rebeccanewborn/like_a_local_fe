@@ -6,6 +6,7 @@ export const currentUserReducer = (state = currentUser, action) => {
   switch (action.type) {
     case LOGIN_USER:
       localStorage.setItem("token", action.payload.jwt);
+      console.log("loggin in user", action.payload.user);
       return action.payload.user;
     case LOGOUT_USER:
       localStorage.removeItem("token");

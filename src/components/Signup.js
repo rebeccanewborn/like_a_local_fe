@@ -1,5 +1,6 @@
 import React from "react";
 import { Form, Input, Button, TextArea, Message } from "semantic-ui-react";
+import Dropzone from "react-dropzone";
 import * as actions from "../actions/userActions";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
@@ -11,7 +12,8 @@ class Signup extends React.Component {
       name: "",
       bio: "",
       email: "",
-      password: ""
+      password: "",
+      avatar_base64: ""
     };
   }
 
@@ -34,7 +36,28 @@ class Signup extends React.Component {
     }
   };
 
+  onDrop = (acceptedFiles, rejectedFiles) => {
+    let reader = new FileReader();
+    reader.onload = () => {
+      let fileAsDataURL = reader.result;
+      this.setState({ avatar_base64: fileAsDataURL });
+    };
+    reader.onabort = () => {
+      console.log("aborting");
+    };
+    reader.onerror = () => {
+      console.log("erroring");
+    };
+
+    reader.readAsDataURL(acceptedFiles[0]);
+  };
+
   render() {
+    let componentConfig = {
+      iconFiletypes: [".jpg", ".png", ".gif"],
+      showFiletypeIcon: true,
+      postUrl: "no-url"
+    };
     return (
       <div>
         {this.handleErrors()}
@@ -47,6 +70,15 @@ class Signup extends React.Component {
               onChange={this.handleChange}
               value={this.state.name}
             />
+          </Form.Field>
+          <Form.Field>
+            <label>Upload an avatar</label>
+            <Dropzone accept="image/*" onDrop={this.onDrop}>
+              <div>
+                Try dropping some files here, or click to select files to
+                upload.
+              </div>
+            </Dropzone>
           </Form.Field>
           <Form.Field>
             <label>Tell Us About Yourself</label>
@@ -82,6 +114,10 @@ class Signup extends React.Component {
     );
   }
 }
+
+/*
+
+*/
 
 const mapStateToProps = state => {
   return { errors: state.errors.signup };
