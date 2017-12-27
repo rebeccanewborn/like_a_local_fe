@@ -35,7 +35,6 @@ class ExcursionShow extends React.Component {
       lat: this.props.excursion.lat,
       lng: this.props.excursion.lng
     };
-    // console.log("excursion show props", this.props.excursion, coordinates);
 
     return (
       <div>
@@ -77,8 +76,5 @@ const mapStateToProps = state => {
     currentUserId: state.currentUser.id
   };
 };
-/*
-<MapContainer coordinates={coordinates} name={this.props.excursion.address} />
-*/
 
 export default withRouter(connect(mapStateToProps, actions)(ExcursionShow));
