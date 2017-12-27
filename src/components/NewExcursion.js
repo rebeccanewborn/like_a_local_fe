@@ -12,6 +12,7 @@ import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng
 } from "react-places-autocomplete";
+import Dropzone from "react-dropzone";
 import actions from "../actions";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
@@ -28,7 +29,8 @@ class NewExcursion extends React.Component {
       searchTerm: "",
       address: "",
       lat: null,
-      lng: null
+      lng: null,
+      images: []
     };
   }
 
@@ -61,6 +63,12 @@ class NewExcursion extends React.Component {
     };
     this.props.newExcursion(data, this.props.history);
     this.props.getAllCities();
+  };
+
+  onDrop = (acceptedFiles, rejectedFiles) => {
+    const images = this.state.images;
+    images.push(acceptedFiles.map(file => file.preview));
+    this.setState({ images });
   };
 
   render() {
@@ -131,6 +139,15 @@ class NewExcursion extends React.Component {
               />
             </div>
           ) : null}
+          <Form.Field>
+            <label>Add images</label>
+            <Dropzone accept="image/*" onDrop={this.onDrop}>
+              <div>
+                Try dropping some files here, or click to select files to
+                upload.
+              </div>
+            </Dropzone>
+          </Form.Field>
           <Button type="submit">Submit</Button>
         </Form>
         <br />

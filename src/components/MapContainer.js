@@ -4,7 +4,6 @@ import { GoogleApiWrapper, Map, Marker, InfoWindow } from "google-maps-react";
 
 class MapContainer extends React.Component {
   render() {
-    console.log(this.props.coordinates);
     return this.props.coordinates.lat ? (
       <Segment
         loading={!this.props.loaded}
@@ -17,7 +16,7 @@ class MapContainer extends React.Component {
         <Map
           style={{ width: "97.5%", height: "95.5%", position: "relative" }}
           google={this.props.google}
-          initialCenter={this.props.coordinates}
+          initialCenter={this.state.coordinates}
           zoom={16}
         >
           <Marker position={this.props.coordinates} />
