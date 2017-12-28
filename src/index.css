@@ -291,3 +291,13 @@ div.filepicker {
 .filepicker.dropzone .dz-preview.dz-image-preview .dz-image {
   border-radius: 5px;
 }
+
+/* .dz-error-message {
+  visibility: collapse;
+}
+.dz-success-mark {
+  visibility: collapse;
+}
+.dz-error-mark {
+  visibility: collapse;
+} */

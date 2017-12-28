@@ -12,7 +12,7 @@ import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng
 } from "react-places-autocomplete";
-import Dropzone from "react-dropzone";
+import DropzoneComponent from "react-dropzone-component";
 import actions from "../actions";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
@@ -30,7 +30,7 @@ class NewExcursion extends React.Component {
       address: "",
       lat: null,
       lng: null,
-      images: []
+      avatar_base64s: []
     };
   }
 
@@ -65,13 +65,25 @@ class NewExcursion extends React.Component {
     this.props.getAllCities();
   };
 
-  onDrop = (acceptedFiles, rejectedFiles) => {
-    const images = this.state.images;
-    images.push(acceptedFiles.map(file => file.preview));
-    this.setState({ images });
+  onDrop = file => {
+    let reader = new FileReader();
+    reader.onload = () => {
+      let fileAsDataURL = reader.result;
+      let avatar_base64s = this.state.avatar_base64s;
+      avatar_base64s.push(fileAsDataURL);
+      this.setState({ avatar_base64s });
+    };
+    reader.readAsDataURL(file);
   };
 
   render() {
+    let componentConfig = {
+      iconFiletypes: [".jpg", ".png", ".gif"],
+      showFiletypeIcon: true,
+      postUrl: "/"
+    };
+    let djsConfig = { autoProcessQueue: false };
+    let eventHandlers = { addedfile: this.onDrop };
     return (
       <Container>
         <Form onSubmit={this.handleSubmit}>
@@ -92,6 +104,13 @@ class NewExcursion extends React.Component {
               value={this.state.description}
               onChange={this.handleChange}
               style={{ minHeight: 100 }}
+            />
+          </Form.Field>
+          <Form.Field>
+            <DropzoneComponent
+              config={componentConfig}
+              eventHandlers={eventHandlers}
+              djsConfig={djsConfig}
             />
           </Form.Field>
           <Form.Field>

@@ -1,6 +1,5 @@
 import React from "react";
 import { Form, Input, Button, TextArea, Message } from "semantic-ui-react";
-import Dropzone from "react-dropzone";
 import DropzoneComponent from "react-dropzone-component";
 import * as actions from "../actions/userActions";
 import { connect } from "react-redux";
@@ -47,6 +46,13 @@ class Signup extends React.Component {
   };
 
   render() {
+    let componentConfig = {
+      iconFiletypes: [".jpg", ".png", ".gif"],
+      showFiletypeIcon: true,
+      postUrl: "/"
+    };
+    let djsConfig = { autoProcessQueue: false };
+    let eventHandlers = { addedfile: this.onDrop };
     return (
       <div>
         {this.handleErrors()}
@@ -63,17 +69,10 @@ class Signup extends React.Component {
           <Form.Field>
             <label>Upload an avatar</label>
             <DropzoneComponent
-              config={{
-                iconFiletypes: [".jpg", ".png", ".gif"],
-                postUrl: "/"
-              }}
-              eventHandlers={{ addedfile: this.onDrop }}
-            >
-              <div>
-                Try dropping some files here, or click to select files to
-                upload.
-              </div>
-            </DropzoneComponent>
+              config={componentConfig}
+              eventHandlers={eventHandlers}
+              djsConfig={djsConfig}
+            />
           </Form.Field>
           <Form.Field>
             <label>Tell Us About Yourself</label>
