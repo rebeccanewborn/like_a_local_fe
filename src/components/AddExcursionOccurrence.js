@@ -1,6 +1,5 @@
 import React from "react";
 import { Segment, Header, Form, Button, Popup } from "semantic-ui-react";
-import moment from "moment";
 import Datetime from "react-datetime";
 import { connect } from "react-redux";
 import * as actions from "../actions/excursionActions";
@@ -30,7 +29,7 @@ class AddExcursionOccurrence extends React.Component {
 
   render() {
     return (
-      <Segment color="red">
+      <Segment color="red" width={10}>
         <Header as="h4">Duration: {this.props.duration} hours</Header>
         <Form onSubmit={this.handleSubmit}>
           <Form.Group>

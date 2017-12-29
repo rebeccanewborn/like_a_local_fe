@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { Header, Button, Card, Modal } from "semantic-ui-react";
 import MapContainer from "./MapContainer";
 import PhotoCarousel from "./PhotoCarousel";
+import Feedback from "./Feedback";
 import OccurrenceCard from "./OccurrenceCard";
 import AddExcursionOccurrence from "./AddExcursionOccurrence";
 import * as actions from "../actions/excursionActions";
@@ -70,7 +71,9 @@ class ExcursionShow extends React.Component {
             />
             <Button onClick={this.handleDelete}>Delete this Excursion</Button>
           </div>
-        ) : null}
+        ) : (
+          <Feedback />
+        )}
         <br />
         <Header as="h4">
           Where you will meet: {this.props.excursion.address}
@@ -79,8 +82,13 @@ class ExcursionShow extends React.Component {
           coordinates={coordinates}
           address={this.props.excursion.address}
         />
+        <Header as="h1">Photos from the host</Header>
         {this.props.excursionLoaded ? (
           <PhotoCarousel photos={this.props.excursion.host_photos} />
+        ) : null}
+        <Header as="h1">Photos from other users</Header>
+        {this.props.excursionLoaded ? (
+          <PhotoCarousel photos={this.props.excursion.user_photos} />
         ) : null}
       </div>
     );

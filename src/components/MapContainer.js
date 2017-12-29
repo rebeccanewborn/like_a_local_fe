@@ -1,6 +1,6 @@
 import React from "react";
 import { Segment, Loader } from "semantic-ui-react";
-import { GoogleApiWrapper, Map, Marker, InfoWindow } from "google-maps-react";
+import { GoogleApiWrapper, Map, Marker } from "google-maps-react";
 import GoogleApiKeys from "../services/keys.js";
 
 class MapContainer extends React.Component {

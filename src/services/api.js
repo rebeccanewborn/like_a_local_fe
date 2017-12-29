@@ -95,3 +95,11 @@ export const destroyExcursionOccurrence = id => {
     headers
   }).then(res => res.json());
 };
+
+export const addPhotos = data => {
+  return fetch(`${baseURL}/photos`, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(data)
+  }).then(res => res.json());
+};
