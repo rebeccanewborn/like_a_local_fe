@@ -1,5 +1,5 @@
 import React from "react";
-import { Segment, Header, Form, Button } from "semantic-ui-react";
+import { Segment, Header, Form, Button, Popup } from "semantic-ui-react";
 import moment from "moment";
 import Datetime from "react-datetime";
 import { connect } from "react-redux";
@@ -9,7 +9,7 @@ class AddExcursionOccurrence extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      time: moment()
+      time: null
     };
   }
 
@@ -25,18 +25,38 @@ class AddExcursionOccurrence extends React.Component {
       ...this.state,
       excursion_id: this.props.excursion_id
     });
+    this.setState({ time: null });
   };
 
   render() {
     return (
-      <Segment color="red" compact>
+      <Segment color="red">
         <Header as="h4">Duration: {this.props.duration} hours</Header>
         <Form onSubmit={this.handleSubmit}>
-          <Datetime
-            onChange={this.handleChange}
-            placeholder={"Click here to select a date and time"}
-          />
-          <Button type="submit">Add Timeslot</Button>
+          <Form.Group>
+            <Form.Field width={6}>
+              <Datetime
+                onChange={this.handleChange}
+                inputProps={{
+                  placeholder: "Click here to select a date and time"
+                }}
+                value={this.state.time}
+                closeOnSelect={!!this.state.time}
+              />
+            </Form.Field>
+            <Form.Field width={4}>
+              <Popup
+                trigger={
+                  <Button type="submit" basic>
+                    Add Timeslot
+                  </Button>
+                }
+                content="Timeslot added!"
+                on="click"
+                hideOnScroll
+              />
+            </Form.Field>
+          </Form.Group>
         </Form>
       </Segment>
     );

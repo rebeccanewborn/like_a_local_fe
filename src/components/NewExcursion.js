@@ -12,6 +12,8 @@ import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng
 } from "react-places-autocomplete";
+import { GoogleApiWrapper } from "google-maps-react";
+import GoogleApiKeys from "../services/keys.js";
 import DropzoneComponent from "react-dropzone-component";
 import actions from "../actions";
 import { connect } from "react-redux";
@@ -151,7 +153,9 @@ class NewExcursion extends React.Component {
               <PlacesAutocomplete
                 inputProps={{
                   onChange: this.handleSearchTerm,
-                  value: this.state.searchTerm
+                  value: this.state.searchTerm,
+                  placeholder:
+                    "Search for places so your guests know where to find you"
                 }}
                 style={{ width: "50%" }}
                 onSelect={this.handleSelect}
@@ -186,4 +190,6 @@ const mapStateToProps = state => {
   return { cities, host_id: state.currentUser.id };
 };
 
-export default withRouter(connect(mapStateToProps, actions)(NewExcursion));
+export default GoogleApiWrapper({
+  apiKey: GoogleApiKeys.key
+})(withRouter(connect(mapStateToProps, actions)(NewExcursion)));

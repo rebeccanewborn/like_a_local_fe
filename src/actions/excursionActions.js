@@ -68,7 +68,9 @@ export const excursionDropout = (excursionOccurenceId, userId) => {
 export const newExcursionOccurrence = data => {
   return dispatch => {
     postExcursionOccurrence(data).then(res => {
-      dispatch({ type: SET_EXCURSION, payload: res });
+      if (!res.error) {
+        dispatch({ type: SET_EXCURSION, payload: res });
+      }
     });
   };
 };

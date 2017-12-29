@@ -75,7 +75,10 @@ class ExcursionShow extends React.Component {
         <Header as="h4">
           Where you will meet: {this.props.excursion.address}
         </Header>
-        <MapContainer coordinates={coordinates} />
+        <MapContainer
+          coordinates={coordinates}
+          address={this.props.excursion.address}
+        />
         {this.props.excursionLoaded ? (
           <PhotoCarousel photos={this.props.excursion.host_photos} />
         ) : null}
