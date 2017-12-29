@@ -1,5 +1,6 @@
 import React from "react";
 import { Form, Input, Button, TextArea, Message } from "semantic-ui-react";
+import DropzoneComponent from "react-dropzone-component";
 import * as actions from "../actions/userActions";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
@@ -11,7 +12,8 @@ class Signup extends React.Component {
       name: "",
       bio: "",
       email: "",
-      password: ""
+      password: "",
+      avatar_base64: ""
     };
   }
 
@@ -34,7 +36,23 @@ class Signup extends React.Component {
     }
   };
 
+  onDrop = file => {
+    let reader = new FileReader();
+    reader.onload = () => {
+      let fileAsDataURL = reader.result;
+      this.setState({ avatar_base64: fileAsDataURL });
+    };
+    reader.readAsDataURL(file);
+  };
+
   render() {
+    let componentConfig = {
+      iconFiletypes: [".jpg", ".png", ".gif"],
+      showFiletypeIcon: true,
+      postUrl: "/"
+    };
+    let djsConfig = { autoProcessQueue: false };
+    let eventHandlers = { addedfile: this.onDrop };
     return (
       <div>
         {this.handleErrors()}
@@ -46,6 +64,14 @@ class Signup extends React.Component {
               name="name"
               onChange={this.handleChange}
               value={this.state.name}
+            />
+          </Form.Field>
+          <Form.Field>
+            <label>Upload an avatar</label>
+            <DropzoneComponent
+              config={componentConfig}
+              eventHandlers={eventHandlers}
+              djsConfig={djsConfig}
             />
           </Form.Field>
           <Form.Field>
@@ -82,6 +108,10 @@ class Signup extends React.Component {
     );
   }
 }
+
+/*
+
+*/
 
 const mapStateToProps = state => {
   return { errors: state.errors.signup };

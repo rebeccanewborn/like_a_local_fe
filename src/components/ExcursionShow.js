@@ -1,8 +1,10 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { Header, Button, Card, Segment, Modal } from "semantic-ui-react";
+import { Header, Button, Card, Modal } from "semantic-ui-react";
 import MapContainer from "./MapContainer";
+import PhotoCarousel from "./PhotoCarousel";
+import Feedback from "./Feedback";
 import OccurrenceCard from "./OccurrenceCard";
 import AddExcursionOccurrence from "./AddExcursionOccurrence";
 import * as actions from "../actions/excursionActions";
@@ -17,7 +19,7 @@ class ExcursionShow extends React.Component {
 
   render() {
     let occurrences;
-    if (this.props.excursion.excursion_occurrences) {
+    if (this.props.excursionLoaded) {
       occurrences = this.props.excursion.excursion_occurrences.map(occ => {
         let attendeeIds = occ.users.map(user => user.id);
         return (
@@ -44,7 +46,7 @@ class ExcursionShow extends React.Component {
         <Header as="h4">Duration: {this.props.excursion.duration} hours</Header>
         <Header as="h4">Price: {this.props.excursion.price}</Header>
 
-        {this.props.excursion.excursion_occurrences &&
+        {this.props.excursionLoaded &&
         this.props.excursion.excursion_occurrences.length > 0 ? (
           <Modal
             trigger={
@@ -69,21 +71,38 @@ class ExcursionShow extends React.Component {
             />
             <Button onClick={this.handleDelete}>Delete this Excursion</Button>
           </div>
-        ) : null}
+        ) : (
+          <Feedback />
+        )}
         <br />
         <Header as="h4">
           Where you will meet: {this.props.excursion.address}
         </Header>
-        <MapContainer coordinates={coordinates} />
+        <MapContainer
+          coordinates={coordinates}
+          address={this.props.excursion.address}
+        />
+        <Header as="h1">Photos from the host</Header>
+        {this.props.excursionLoaded ? (
+          <PhotoCarousel photos={this.props.excursion.host_photos} />
+        ) : null}
+        <Header as="h1">Photos from other users</Header>
+        {this.props.excursionLoaded ? (
+          <PhotoCarousel photos={this.props.excursion.user_photos} />
+        ) : null}
       </div>
     );
   }
 }
+/*
 
+*/
 const mapStateToProps = state => {
   return {
     isHost: state.currentUser.id === state.currentExcursion.host_id,
-    currentUserId: state.currentUser.id
+    currentUserId: state.currentUser.id,
+    excursion: state.currentExcursion,
+    excursionLoaded: !!state.currentExcursion.id
   };
 };
 

@@ -1,6 +1,7 @@
 import React from "react";
 import { Segment, Loader } from "semantic-ui-react";
-import { GoogleApiWrapper, Map, Marker, InfoWindow } from "google-maps-react";
+import { GoogleApiWrapper, Map, Marker } from "google-maps-react";
+import GoogleApiKeys from "../services/keys.js";
 
 class MapContainer extends React.Component {
   render() {
@@ -15,7 +16,7 @@ class MapContainer extends React.Component {
       >
         <Map
           style={{ width: "97.5%", height: "95.5%", position: "relative" }}
-          google={this.props.google}
+          google={window.google}
           initialCenter={this.props.coordinates}
           zoom={16}
         >
@@ -29,5 +30,5 @@ class MapContainer extends React.Component {
 }
 
 export default GoogleApiWrapper({
-  apiKey: "AIzaSyAdtLKvDM52u95pkU1h8LoKNiKpxsEVDeM"
+  apiKey: GoogleApiKeys.key
 })(MapContainer);

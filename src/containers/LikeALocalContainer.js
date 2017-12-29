@@ -7,6 +7,7 @@ import ExcursionShow from "../components/ExcursionShow";
 import NavBar from "../components/NavBar";
 import Login from "../components/Login";
 import Signup from "../components/Signup";
+import Profile from "../components/Profile";
 import actions from "../actions";
 import { connect } from "react-redux";
 import { Container } from "semantic-ui-react";
@@ -22,6 +23,7 @@ class LikeALocalContainer extends React.Component {
         <Switch>
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={Signup} />
+          <Route exact path="/my+profile" component={Profile} />
           <Route
             exact
             path="/cities"
@@ -36,12 +38,7 @@ class LikeALocalContainer extends React.Component {
           <Route
             path="/excursions/:id"
             render={() => {
-              return (
-                <ExcursionShow
-                  excursion={this.props.currentExcursion}
-                  coordinates={this.props.coordinates}
-                />
-              );
+              return <ExcursionShow coordinates={this.props.coordinates} />;
             }}
           />
         </Switch>
@@ -55,7 +52,6 @@ const mapStateToProps = state => {
     isLoggedIn: !!state.currentUser.email,
     cities: state.allCities,
     currentCity: state.currentCity,
-    currentExcursion: state.currentExcursion,
     coordinates: {
       lat: state.currentExcursion.lat,
       lng: state.currentExcursion.lng

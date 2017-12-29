@@ -12,7 +12,9 @@ import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng
 } from "react-places-autocomplete";
-import Dropzone from "react-dropzone";
+import { GoogleApiWrapper } from "google-maps-react";
+import GoogleApiKeys from "../services/keys.js";
+import DropzoneComponent from "react-dropzone-component";
 import actions from "../actions";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
@@ -30,7 +32,7 @@ class NewExcursion extends React.Component {
       address: "",
       lat: null,
       lng: null,
-      images: []
+      avatar_base64s: []
     };
   }
 
@@ -65,13 +67,25 @@ class NewExcursion extends React.Component {
     this.props.getAllCities();
   };
 
-  onDrop = (acceptedFiles, rejectedFiles) => {
-    const images = this.state.images;
-    images.push(acceptedFiles.map(file => file.preview));
-    this.setState({ images });
+  onDrop = file => {
+    let reader = new FileReader();
+    reader.onload = () => {
+      let fileAsDataURL = reader.result;
+      let avatar_base64s = this.state.avatar_base64s;
+      avatar_base64s.push(fileAsDataURL);
+      this.setState({ avatar_base64s });
+    };
+    reader.readAsDataURL(file);
   };
 
   render() {
+    let componentConfig = {
+      iconFiletypes: [".jpg", ".png", ".gif"],
+      showFiletypeIcon: true,
+      postUrl: "/"
+    };
+    let djsConfig = { autoProcessQueue: false };
+    let eventHandlers = { addedfile: this.onDrop };
     return (
       <Container>
         <Form onSubmit={this.handleSubmit}>
@@ -92,6 +106,13 @@ class NewExcursion extends React.Component {
               value={this.state.description}
               onChange={this.handleChange}
               style={{ minHeight: 100 }}
+            />
+          </Form.Field>
+          <Form.Field>
+            <DropzoneComponent
+              config={componentConfig}
+              eventHandlers={eventHandlers}
+              djsConfig={djsConfig}
             />
           </Form.Field>
           <Form.Field>
@@ -132,22 +153,16 @@ class NewExcursion extends React.Component {
               <PlacesAutocomplete
                 inputProps={{
                   onChange: this.handleSearchTerm,
-                  value: this.state.searchTerm
+                  value: this.state.searchTerm,
+                  placeholder:
+                    "Search for places so your guests know where to find you"
                 }}
                 style={{ width: "50%" }}
                 onSelect={this.handleSelect}
               />
             </div>
           ) : null}
-          <Form.Field>
-            <label>Add images</label>
-            <Dropzone accept="image/*" onDrop={this.onDrop}>
-              <div>
-                Try dropping some files here, or click to select files to
-                upload.
-              </div>
-            </Dropzone>
-          </Form.Field>
+
           <Button type="submit">Submit</Button>
         </Form>
         <br />
@@ -163,4 +178,6 @@ const mapStateToProps = state => {
   return { cities, host_id: state.currentUser.id };
 };
 
-export default withRouter(connect(mapStateToProps, actions)(NewExcursion));
+export default GoogleApiWrapper({
+  apiKey: GoogleApiKeys.key
+})(withRouter(connect(mapStateToProps, actions)(NewExcursion)));
