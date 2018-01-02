@@ -6,7 +6,6 @@ const ExcursionListItem = props => {
   const handleClick = ev => {
     props.history.push(`/excursions/${props.excursion.id}`);
   };
-  console.log(props);
   return (
     <Grid.Column>
       <Card className="excursion-card" onClick={handleClick}>

@@ -24,59 +24,37 @@ class PhotoCarousel extends React.Component {
   };
   render() {
     let images = this.props.photos.map((photo, index) => {
-      return <Image key={index} src={photo.image} />;
+      return <Image key={index} src={photo.image} className="carousel-img" />;
     });
 
     let dots = this.props.photos.map((photo, index) => {
       return (
         <Icon
-          key={index + 40}
+          key={index}
           name="circle"
           inverted
-          color="grey"
+          color="blue"
           disabled={index !== this.state.currentSlide}
-          style={{ display: "inline-block" }}
           onClick={() => this.setState({ currentSlide: index })}
         />
       );
     });
 
     return (
-      <Segment>
-        <div
-          style={{
-            position: "absolute",
-            left: "50%",
-            right: "50%",
-            bottom: "5%",
-            textAlign: "center",
-            zIndex: "999"
-          }}
-        >
-          {dots}
-        </div>
+      <div className="carousel">
+        <div className="carousel-dots">{dots}</div>
         <Icon
           name="chevron left"
           onClick={this.prevSlide}
-          style={{
-            position: "absolute",
-            left: "0%",
-            bottom: "50%",
-            top: "50%"
-          }}
+          className="carousel-prev-arrow"
         />
         {images.find(img => parseInt(img.key) === this.state.currentSlide)}
         <Icon
           name="chevron right"
           onClick={this.nextSlide}
-          style={{
-            position: "absolute",
-            right: "0%",
-            bottom: "50%",
-            top: "50%"
-          }}
+          className="carousel-next-arrow"
         />
-      </Segment>
+      </div>
     );
   }
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Rating } from "semantic-ui-react";
+import { Modal, Card, Rating } from "semantic-ui-react";
 
 const ReviewCard = props => {
   console.log("review card", props);
@@ -9,7 +9,12 @@ const ReviewCard = props => {
       <Card.Meta>{props.review.posted}</Card.Meta>
       <Card.Description>
         <Rating maxRating={5} rating={props.review.excursion_rating} disabled />
-        {props.review.excursion_review}
+        <br />
+        {props.review.excursion_review
+          .split(" ")
+          .slice(0, 13)
+          .join(" ")
+          .concat("...")}
       </Card.Description>
     </Card>
   );

@@ -24,3 +24,41 @@ body {
   object-fit: cover;
   height: 80%;
 }
+
+.carousel {
+  position: relative;
+  height: 370px;
+  width: 100%;
+}
+
+.carousel-dots {
+  z-index: 9999 !important;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 10px;
+}
+
+.carousel-prev-arrow {
+  z-index: 9999 !important;
+  position: absolute;
+  left: 0%;
+  top: 50%;
+  bottom: 50%;
+}
+.carousel-next-arrow {
+  z-index: 9999 !important;
+  position: absolute;
+  right: 0%;
+  top: 50%;
+  bottom: 50%;
+}
+
+.carousel-img {
+  object-fit: cover;
+  height: 100%;
+  -webkit-transition: opacity 1s ease-in-out;
+  -moz-transition: opacity 1s ease-in-out;
+  -o-transition: opacity 1s ease-in-out;
+  transition: opacity 1s ease-in-out;
+}
