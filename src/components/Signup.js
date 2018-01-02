@@ -1,6 +1,6 @@
 import React from "react";
 import { Form, Input, Button, TextArea, Message } from "semantic-ui-react";
-import DropzoneComponent from "react-dropzone-component";
+import MyDropzone from "./MyDropzone";
 import * as actions from "../actions/userActions";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
@@ -46,13 +46,6 @@ class Signup extends React.Component {
   };
 
   render() {
-    let componentConfig = {
-      iconFiletypes: [".jpg", ".png", ".gif"],
-      showFiletypeIcon: true,
-      postUrl: "/"
-    };
-    let djsConfig = { autoProcessQueue: false };
-    let eventHandlers = { addedfile: this.onDrop };
     return (
       <div>
         {this.handleErrors()}
@@ -68,11 +61,7 @@ class Signup extends React.Component {
           </Form.Field>
           <Form.Field>
             <label>Upload an avatar</label>
-            <DropzoneComponent
-              config={componentConfig}
-              eventHandlers={eventHandlers}
-              djsConfig={djsConfig}
-            />
+            <MyDropzone onDrop={this.onDrop} />
           </Form.Field>
           <Form.Field>
             <label>Tell Us About Yourself</label>
@@ -108,10 +97,6 @@ class Signup extends React.Component {
     );
   }
 }
-
-/*
-
-*/
 
 const mapStateToProps = state => {
   return { errors: state.errors.signup };

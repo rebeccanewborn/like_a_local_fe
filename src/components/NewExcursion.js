@@ -14,7 +14,7 @@ import PlacesAutocomplete, {
 } from "react-places-autocomplete";
 import { GoogleApiWrapper } from "google-maps-react";
 import GoogleApiKeys from "../services/keys.js";
-import DropzoneComponent from "react-dropzone-component";
+import MyDropzone from "./MyDropzone";
 import actions from "../actions";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
@@ -32,7 +32,7 @@ class NewExcursion extends React.Component {
       address: "",
       lat: null,
       lng: null,
-      avatar_base64s: []
+      image_base64s: []
     };
   }
 
@@ -71,21 +71,14 @@ class NewExcursion extends React.Component {
     let reader = new FileReader();
     reader.onload = () => {
       let fileAsDataURL = reader.result;
-      let avatar_base64s = this.state.avatar_base64s;
-      avatar_base64s.push(fileAsDataURL);
-      this.setState({ avatar_base64s });
+      let image_base64s = this.state.image_base64s;
+      image_base64s.push(fileAsDataURL);
+      this.setState({ image_base64s });
     };
     reader.readAsDataURL(file);
   };
 
   render() {
-    let componentConfig = {
-      iconFiletypes: [".jpg", ".png", ".gif"],
-      showFiletypeIcon: true,
-      postUrl: "/"
-    };
-    let djsConfig = { autoProcessQueue: false };
-    let eventHandlers = { addedfile: this.onDrop };
     return (
       <Container>
         <Form onSubmit={this.handleSubmit}>
@@ -109,11 +102,7 @@ class NewExcursion extends React.Component {
             />
           </Form.Field>
           <Form.Field>
-            <DropzoneComponent
-              config={componentConfig}
-              eventHandlers={eventHandlers}
-              djsConfig={djsConfig}
-            />
+            <MyDropzone onDrop={this.onDrop} />
           </Form.Field>
           <Form.Field>
             <label>Duration</label>

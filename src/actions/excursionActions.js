@@ -11,7 +11,8 @@ import {
   destroyUserExcursion,
   postExcursionOccurrence,
   destroyExcursionOccurrence,
-  addPhotos
+  addPhotos,
+  addReview
 } from "../services/api";
 
 export const newExcursion = (data, history) => {
@@ -87,6 +88,15 @@ export const deleteExcursionOccurrence = id => {
 export const addExcursionPhotos = data => {
   return dispatch => {
     addPhotos(data).then(res => {
+      dispatch({ type: SET_EXCURSION, payload: res });
+    });
+  };
+};
+
+export const addExcursionReview = data => {
+  return dispatch => {
+    addReview(data).then(res => {
+      console.log(res);
       dispatch({ type: SET_EXCURSION, payload: res });
     });
   };

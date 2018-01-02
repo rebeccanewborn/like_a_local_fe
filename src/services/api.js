@@ -103,3 +103,11 @@ export const addPhotos = data => {
     body: JSON.stringify(data)
   }).then(res => res.json());
 };
+
+export const addReview = data => {
+  return fetch(`${baseURL}/reviews`, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(data)
+  }).then(res => res.json());
+};

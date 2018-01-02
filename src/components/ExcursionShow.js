@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import { Header, Button, Card, Modal } from "semantic-ui-react";
 import MapContainer from "./MapContainer";
 import PhotoCarousel from "./PhotoCarousel";
-import SlickCarousel from "./SlickCarousel";
 import Feedback from "./Feedback";
 import OccurrenceCard from "./OccurrenceCard";
 import AddExcursionOccurrence from "./AddExcursionOccurrence";
@@ -89,7 +88,7 @@ class ExcursionShow extends React.Component {
         ) : null}
         <Header as="h1">Photos from other users</Header>
         {this.props.excursionLoaded ? (
-          <SlickCarousel photos={this.props.excursion.user_photos} />
+          <PhotoCarousel photos={this.props.excursion.user_photos} />
         ) : null}
       </div>
     );

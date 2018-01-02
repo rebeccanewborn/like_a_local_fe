@@ -1,70 +1,136 @@
 import React from "react";
 import { connect } from "react-redux";
 import * as actions from "../actions/excursionActions";
-import { Modal, Button, Tab } from "semantic-ui-react";
-import DropzoneComponent from "react-dropzone-component";
+import { Modal, Button, Tab, Form, Rating, TextArea } from "semantic-ui-react";
+import MyDropzone from "./MyDropzone";
 
 class Feedback extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      modalOpen: false,
-      photos: []
-    };
+    this.state = this.initialState();
   }
+
+  initialState = () => {
+    return {
+      modalOpen: false,
+      activeIndex: 0,
+      photosTab: {
+        photos: []
+      },
+      reviewsTab: {
+        excursion_rating: null,
+        excursion_review: "",
+        host_rating: null,
+        host_review: ""
+      }
+    };
+  };
 
   handleOpen = () => {
     this.setState({ modalOpen: true });
   };
 
   handleClose = () => {
-    this.setState({ modalOpen: false });
+    this.setState(this.initialState());
+  };
+
+  handleTabChange = (ev, data) => {
+    this.setState({
+      ...this.initialState(),
+      modalOpen: true,
+      activeIndex: data.activeIndex
+    });
+  };
+
+  handleReviewChange = ev => {
+    this.setState({
+      reviewsTab: {
+        ...this.state.reviewsTab,
+        [ev.target.name]: ev.target.value
+      }
+    });
+  };
+
+  handleRatingChange = (ev, data) => {
+    this.setState({
+      reviewsTab: { ...this.state.reviewsTab, [data.name]: data.rating }
+    });
+  };
+
+  handleReviewSubmit = ev => {
+    ev.preventDefault();
+    this.props.addExcursionReview({
+      review: {
+        ...this.state.reviewsTab,
+        user_id: this.props.user_id,
+        excursion_id: this.props.excursion_id
+      }
+    });
+    this.setState(this.initialState());
   };
 
   onDrop = file => {
     let reader = new FileReader();
+    const photos = this.state.photosTab.photos;
     reader.onload = () => {
       let fileAsDataURL = reader.result;
-      let photos = this.state.photos;
       photos.push(fileAsDataURL);
-      this.setState({ photos });
+      this.setState({ photosTab: { photos } });
     };
     reader.readAsDataURL(file);
   };
 
   handleImageSubmit = ev => {
     this.props.addExcursionPhotos({
-      photos: this.state.photos,
+      photos: this.state.photosTab.photos,
       user_id: this.props.user_id,
       excursion_id: this.props.excursion_id
     });
-    this.setState({ modalOpen: false });
+    this.setState(this.initialState());
   };
 
   render() {
     const panes = [
       {
         menuItem: "Leave a Review",
-        render: () => <Tab.Pane>Review portion</Tab.Pane>
+        render: () => (
+          <Tab.Pane>
+            <Form>
+              <label>Tell us about your experience on this excursion </label>
+              <br />
+              <Rating
+                maxRating={5}
+                rating={this.state.excursion_rating}
+                name="excursion_rating"
+                onRate={this.handleRatingChange}
+              />
+              <TextArea
+                name="excursion_review"
+                onChange={this.handleReviewChange}
+              />
+              <label>Tell us about your experience with the host </label>
+              <br />
+              <Rating
+                maxRating={5}
+                rating={this.state.host_rating}
+                name="host_rating"
+                onRate={this.handleRatingChange}
+              />
+              <TextArea name="host_review" onChange={this.handleReviewChange} />
+              <Button onClick={this.handleReviewSubmit} type="submit">
+                Submit Reviews
+              </Button>
+            </Form>
+          </Tab.Pane>
+        )
       },
       {
         menuItem: "Post Some Pictures",
         render: () => {
-          let componentConfig = {
-            iconFiletypes: [".jpg", ".png", ".gif"],
-            showFiletypeIcon: true,
-            postUrl: "/"
-          };
-          let djsConfig = { autoProcessQueue: false };
-          let eventHandlers = { addedfile: this.onDrop };
           return (
             <Tab.Pane>
-              <DropzoneComponent
-                config={componentConfig}
-                eventHandlers={eventHandlers}
-                djsConfig={djsConfig}
-              />
-              <Button onClick={this.handleImageSubmit}>Submit</Button>
+              <MyDropzone onDrop={this.onDrop} />
+              <Button onClick={this.handleImageSubmit}>Submit Images</Button>
             </Tab.Pane>
           );
         }
@@ -82,7 +148,12 @@ class Feedback extends React.Component {
       >
         <Modal.Header>Tell us about your experience</Modal.Header>
         <Modal.Content>
-          <Tab menu={{ secondary: true, pointing: true }} panes={panes} />
+          <Tab
+            menu={{ secondary: true, pointing: true }}
+            panes={panes}
+            activeIndex={this.state.activeIndex}
+            onTabChange={this.handleTabChange}
+          />
         </Modal.Content>
       </Modal>
     );
