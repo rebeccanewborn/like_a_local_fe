@@ -6,6 +6,7 @@ import MapContainer from "./MapContainer";
 import PhotoCarousel from "./PhotoCarousel";
 import Feedback from "./Feedback";
 import OccurrenceCard from "./OccurrenceCard";
+import ReviewCard from "./ReviewCard";
 import AddExcursionOccurrence from "./AddExcursionOccurrence";
 import * as actions from "../actions/excursionActions";
 
@@ -18,6 +19,7 @@ class ExcursionShow extends React.Component {
   };
 
   render() {
+    console.log(this.props.excursion);
     let occurrences;
     if (this.props.excursionLoaded) {
       occurrences = this.props.excursion.excursion_occurrences.map(occ => {
@@ -38,6 +40,13 @@ class ExcursionShow extends React.Component {
       lng: this.props.excursion.lng
     };
 
+    let reviews;
+    if (this.props.excursionLoaded) {
+      reviews = this.props.excursion.reviews.map(review => (
+        <ReviewCard review={review} />
+      ));
+    }
+
     return (
       <div>
         <Header as="h1">{this.props.excursion.title}</Header>
@@ -45,6 +54,9 @@ class ExcursionShow extends React.Component {
         <Header as="h3">Hosted by: {this.props.excursion.host_name}</Header>
         <Header as="h4">Duration: {this.props.excursion.duration} hours</Header>
         <Header as="h4">Price: {this.props.excursion.price}</Header>
+        <br />
+        <Card.Group>{reviews}</Card.Group>
+        <br />
 
         {this.props.excursionLoaded &&
         this.props.excursion.excursion_occurrences.length > 0 ? (
@@ -94,9 +106,7 @@ class ExcursionShow extends React.Component {
     );
   }
 }
-/*
 
-*/
 const mapStateToProps = state => {
   return {
     isHost: state.currentUser.id === state.currentExcursion.host_id,

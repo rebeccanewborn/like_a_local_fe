@@ -1,6 +1,7 @@
 import React from "react";
 import { Segment, Header, Form, Button, Popup } from "semantic-ui-react";
 import Datetime from "react-datetime";
+import "react-datetime/css/react-datetime.css";
 import { connect } from "react-redux";
 import * as actions from "../actions/excursionActions";
 

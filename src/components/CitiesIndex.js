@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import * as actions from "../actions/excursionActions";
 import CityIndexItem from "./CityIndexItem";
-import { Grid, Header } from "semantic-ui-react";
+import { Container, Grid, Header } from "semantic-ui-react";
 
 class CitiesIndex extends React.Component {
   componentDidMount() {
@@ -16,12 +16,14 @@ class CitiesIndex extends React.Component {
     ));
 
     return (
-      <Grid centered>
-        <Grid.Row centered>
-          <Header as="h1">Browse Cities</Header>
-        </Grid.Row>
-        <Grid.Row columns={3}>{cityIndexItems}</Grid.Row>
-      </Grid>
+      <Container>
+        <Grid centered>
+          <Grid.Row centered>
+            <Header as="h1">Browse Cities</Header>
+          </Grid.Row>
+          <Grid.Row columns={3}>{cityIndexItems}</Grid.Row>
+        </Grid>
+      </Container>
     );
   }
 }

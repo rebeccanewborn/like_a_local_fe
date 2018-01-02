@@ -18,7 +18,7 @@ class LikeALocalContainer extends React.Component {
   }
   render() {
     return (
-      <Container>
+      <div>
         <NavBar isLoggedIn={this.props.isLoggedIn} />
         <Switch>
           <Route exact path="/login" component={Login} />
@@ -42,7 +42,7 @@ class LikeALocalContainer extends React.Component {
             }}
           />
         </Switch>
-      </Container>
+      </div>
     );
   }
 }
