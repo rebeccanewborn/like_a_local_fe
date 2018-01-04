@@ -1,5 +1,12 @@
 import React from "react";
-import { Form, Input, Button, TextArea, Message } from "semantic-ui-react";
+import {
+  Container,
+  Form,
+  Input,
+  Button,
+  TextArea,
+  Message
+} from "semantic-ui-react";
 import MyDropzone from "./MyDropzone";
 import * as actions from "../actions/userActions";
 import { connect } from "react-redux";
@@ -47,7 +54,7 @@ class Signup extends React.Component {
 
   render() {
     return (
-      <div>
+      <Container>
         {this.handleErrors()}
         <Form onSubmit={this.handleSubmit}>
           <Form.Field>
@@ -93,7 +100,7 @@ class Signup extends React.Component {
           </Form.Field>
           <Button type="submit">Sign Up</Button>
         </Form>
-      </div>
+      </Container>
     );
   }
 }

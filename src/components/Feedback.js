@@ -139,7 +139,7 @@ class Feedback extends React.Component {
     return (
       <Modal
         trigger={
-          <Button onClick={this.handleOpen}>
+          <Button basic className="excursion-button" onClick={this.handleOpen}>
             Tell us about your experience
           </Button>
         }

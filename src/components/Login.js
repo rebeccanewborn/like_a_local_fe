@@ -1,7 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
 import { withRouter, Link } from "react-router-dom";
-import { Form, Message, Input, Button } from "semantic-ui-react";
+import {
+  Container,
+  Header,
+  Form,
+  Message,
+  Input,
+  Button
+} from "semantic-ui-react";
 import * as userActions from "../actions/userActions";
 
 let actions = { ...userActions };
@@ -28,7 +35,11 @@ class Login extends React.Component {
 
   render() {
     return (
-      <div>
+      <Container>
+        <Header as="h1">Login</Header>
+        <Link to="/signup">Or Sign Up Here</Link>
+        <br />
+        <br />
         {this.props.errors ? (
           <Message negative>{this.props.errors}</Message>
         ) : null}
@@ -53,8 +64,7 @@ class Login extends React.Component {
           </Form.Field>
           <Button type="submit">Submit</Button>
         </Form>
-        <Link to="/signup">Sign Up Here</Link>
-      </div>
+      </Container>
     );
   }
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Segment, Image, Grid, Header } from "semantic-ui-react";
+import { Segment, Image, Grid, Header } from "semantic-ui-react";
 import ExcursionListItem from "./ExcursionListItem";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";

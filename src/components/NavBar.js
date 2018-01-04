@@ -2,7 +2,7 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import actions from "../actions";
-import { Container, Menu } from "semantic-ui-react";
+import { Menu } from "semantic-ui-react";
 
 const NavBar = props => {
   const handleLogout = ev => {
@@ -11,19 +11,13 @@ const NavBar = props => {
   };
 
   return (
-    <Menu pointing secondary fluid style={{ borderStyle: "none" }}>
+    <Menu pointing secondary className="navbar">
       <Menu.Menu position="left">
         <Menu.Item onClick={() => props.history.push("/cities")}>
           Home
         </Menu.Item>
         {props.name ? (
-          <Menu.Item
-            onClick={() => {
-              props.history.push("/my+profile");
-            }}
-          >
-            Welcome, {props.name.split(" ")[0]}
-          </Menu.Item>
+          <Menu.Item>Welcome, {props.name.split(" ")[0]}</Menu.Item>
         ) : null}
       </Menu.Menu>
 
@@ -47,6 +41,12 @@ const NavBar = props => {
     </Menu>
   );
 };
+
+/*
+onClick={() => {
+  props.history.push("/my+profile");
+}}
+*/
 
 const mapStateToProps = state => {
   return { name: state.currentUser.name };

@@ -1,5 +1,5 @@
 import React from "react";
-import { Segment, Image, Icon } from "semantic-ui-react";
+import { Image, Icon } from "semantic-ui-react";
 
 class PhotoCarousel extends React.Component {
   constructor(props) {
@@ -32,8 +32,7 @@ class PhotoCarousel extends React.Component {
         <Icon
           key={index}
           name="circle"
-          inverted
-          color="blue"
+          className="carousel-dot"
           disabled={index !== this.state.currentSlide}
           onClick={() => this.setState({ currentSlide: index })}
         />
@@ -48,7 +47,7 @@ class PhotoCarousel extends React.Component {
           onClick={this.prevSlide}
           className="carousel-prev-arrow"
         />
-        {images.find(img => parseInt(img.key) === this.state.currentSlide)}
+        {images.find(img => parseInt(img.key, 10) === this.state.currentSlide)}
         <Icon
           name="chevron right"
           onClick={this.nextSlide}

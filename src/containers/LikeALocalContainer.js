@@ -10,7 +10,6 @@ import Signup from "../components/Signup";
 import Profile from "../components/Profile";
 import actions from "../actions";
 import { connect } from "react-redux";
-import { Container } from "semantic-ui-react";
 
 class LikeALocalContainer extends React.Component {
   componentDidMount() {
