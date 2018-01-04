@@ -13,16 +13,14 @@ class App extends Component {
     if (token) {
       this.props.getCurrentUser(token);
     } else {
-      this.props.history.push("/");
+      this.props.history.push("/welcome");
     }
   }
   render() {
+    console.log("app");
     return (
       <div>
-        <Switch>
-          <Route exact path="/welcome" component={HomePage} />
-          <Route path="/" component={LikeALocalContainer} />
-        </Switch>
+        <Route path="/" component={LikeALocalContainer} />
       </div>
     );
   }

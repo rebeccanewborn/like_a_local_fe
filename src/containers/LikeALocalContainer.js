@@ -15,13 +15,12 @@ import { connect } from "react-redux";
 class LikeALocalContainer extends React.Component {
   componentDidMount() {
     this.props.getAllCities();
-    let token = localStorage.getItem("token");
-    if (!token) {
-      this.props.history.push("/login");
-    }
   }
   render() {
-    return (
+    console.log("like a local container");
+    return this.props.history.location.pathname === "/welcome" ? (
+      <HomePage />
+    ) : (
       <div>
         <NavBar isLoggedIn={this.props.isLoggedIn} />
         <Switch>

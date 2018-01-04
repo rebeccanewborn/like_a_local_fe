@@ -1,26 +1,26 @@
 import React from "react";
-import { Header, Button } from "semantic-ui-react";
+import { Card, Header, Button } from "semantic-ui-react";
 import { withRouter } from "react-router-dom";
 
 const HomePage = props => {
-  const toHome = () => {
-    props.history.push("/login");
-  };
+  console.log("home page");
   return (
     <div className="home-page">
-      <div className="home-page-info">
-        <Header as="h1">See a city through the eyes of a local</Header>
-        <Button
-          basic
-          onClick={() => {
-            toHome();
-          }}
-        >
-          Enter
-        </Button>
-      </div>
+      <Card className="home-page-info">
+        <Card.Content>
+          <Header as="h1">See a city through the eyes of a local</Header>
+          <Button
+            basic
+            onClick={() => {
+              props.history.push("/login");
+            }}
+          >
+            Enter
+          </Button>
+        </Card.Content>
+      </Card>
     </div>
   );
 };
 
-export default HomePage;
+export default withRouter(HomePage);
