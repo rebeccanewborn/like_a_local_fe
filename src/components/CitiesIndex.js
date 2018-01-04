@@ -17,9 +17,6 @@ class CitiesIndex extends React.Component {
 
     return (
       <Grid centered padded>
-        <Grid.Row centered>
-          <Header as="h1">Browse Cities</Header>
-        </Grid.Row>
         <Grid.Row columns={4}>{cityIndexItems}</Grid.Row>
       </Grid>
     );

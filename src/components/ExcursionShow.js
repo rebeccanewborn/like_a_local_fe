@@ -61,17 +61,14 @@ class ExcursionShow extends React.Component {
             </Header>
             {this.props.excursionLoaded ? (
               <div className="host-info">
-                <Image
-                  className="host-avatar-img"
-                  src={this.props.excursion.host.avatar}
-                />
                 Hosted by {this.props.excursion.host.name}
               </div>
             ) : null}
             <Header as="h3" textAlign="center">
               {this.props.excursion.description}
             </Header>
-
+            <br />
+            <br />
             <MapContainer
               coordinates={coordinates}
               address={this.props.excursion.address}
@@ -83,7 +80,9 @@ class ExcursionShow extends React.Component {
               See what people are saying about this excursion
             </Header>
             <Card.Group>{reviews}</Card.Group>
-            <Header as="h2">Photos from other users</Header>
+            <Header as="h2" textAlign="center">
+              Photos from people who have attended this event
+            </Header>
             {this.props.excursionLoaded ? (
               <PhotoCarousel photos={this.props.excursion.user_photos} />
             ) : null}
@@ -93,6 +92,12 @@ class ExcursionShow extends React.Component {
     );
   }
 }
+/*
+<Image
+  className="host-avatar-img"
+  src={this.props.excursion.host.avatar}
+/>
+*/
 
 const mapStateToProps = state => {
   return {

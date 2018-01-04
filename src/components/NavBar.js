@@ -2,7 +2,8 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import actions from "../actions";
-import { Menu } from "semantic-ui-react";
+import { Menu, Image } from "semantic-ui-react";
+import logo from "../images/icon.png";
 
 const NavBar = props => {
   const handleLogout = ev => {
@@ -14,19 +15,26 @@ const NavBar = props => {
     <Menu pointing secondary className="navbar">
       <Menu.Menu position="left">
         <Menu.Item onClick={() => props.history.push("/cities")}>
-          Home
+          <Image src={logo} size="mini" />
         </Menu.Item>
         {props.name ? (
-          <Menu.Item>Welcome, {props.name.split(" ")[0]}</Menu.Item>
+          <Menu.Item className="menu-text">
+            Welcome, {props.name.split(" ")[0]}
+          </Menu.Item>
         ) : null}
       </Menu.Menu>
 
       {props.isLoggedIn ? (
         <Menu.Menu position="right">
-          <Menu.Item onClick={ev => props.history.push("/excursions/new")}>
+          <Menu.Item
+            className="menu-text"
+            onClick={ev => props.history.push("/excursions/new")}
+          >
             New Excursion
           </Menu.Item>
-          <Menu.Item onClick={ev => handleLogout(ev)}>Logout</Menu.Item>
+          <Menu.Item className="menu-text" onClick={ev => handleLogout(ev)}>
+            Logout
+          </Menu.Item>
         </Menu.Menu>
       ) : (
         <Menu.Menu position="right">

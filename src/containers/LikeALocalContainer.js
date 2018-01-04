@@ -6,6 +6,7 @@ import NewExcursion from "../components/NewExcursion";
 import ExcursionShow from "../components/ExcursionShow";
 import NavBar from "../components/NavBar";
 import Login from "../components/Login";
+import HomePage from "../components/HomePage";
 import Signup from "../components/Signup";
 import Profile from "../components/Profile";
 import actions from "../actions";
@@ -14,6 +15,10 @@ import { connect } from "react-redux";
 class LikeALocalContainer extends React.Component {
   componentDidMount() {
     this.props.getAllCities();
+    let token = localStorage.getItem("token");
+    if (!token) {
+      this.props.history.push("/login");
+    }
   }
   render() {
     return (

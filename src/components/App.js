@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Switch, Route, withRouter } from "react-router-dom";
 import LikeALocalContainer from "../containers/LikeALocalContainer";
+import HomePage from "./HomePage";
 import actions from "../actions";
 
 //redux imports
@@ -12,13 +13,14 @@ class App extends Component {
     if (token) {
       this.props.getCurrentUser(token);
     } else {
-      this.props.history.push("/login");
+      this.props.history.push("/");
     }
   }
   render() {
     return (
       <div>
         <Switch>
+          <Route exact path="/welcome" component={HomePage} />
           <Route path="/" component={LikeALocalContainer} />
         </Switch>
       </div>

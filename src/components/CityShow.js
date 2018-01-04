@@ -1,5 +1,5 @@
 import React from "react";
-import { Segment, Image, Grid, Header } from "semantic-ui-react";
+import { Segment, Image, Grid, Header, Container } from "semantic-ui-react";
 import ExcursionListItem from "./ExcursionListItem";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
@@ -20,10 +20,10 @@ class CityShow extends React.Component {
     }
     return (
       <div className="city-show">
-        <Segment attached="top" style={{ height: "350px" }}>
+        <Segment attached="top" className="city-show-header">
           <Image className="city-cover" src={this.props.city.image_url} />
         </Segment>
-        <Segment>
+        <Segment className="city-show-body">
           <Header as="h1">{this.props.city.name}</Header>
           <Grid columns={5}>{excursions}</Grid>
         </Segment>

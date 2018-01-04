@@ -46,12 +46,14 @@ class PhotoCarousel extends React.Component {
           name="chevron left"
           onClick={this.prevSlide}
           className="carousel-prev-arrow"
+          size="large"
         />
         {images.find(img => parseInt(img.key, 10) === this.state.currentSlide)}
         <Icon
           name="chevron right"
           onClick={this.nextSlide}
           className="carousel-next-arrow"
+          size="large"
         />
       </div>
     );

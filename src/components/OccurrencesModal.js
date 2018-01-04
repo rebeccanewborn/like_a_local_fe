@@ -22,22 +22,28 @@ const OccurrencesModal = props => {
     <Modal
       trigger={
         <Button basic className="excursion-button">
-          {props.isHost ? "Manage Occurrences" : "When do you want to go?"}
+          {props.isHost ? "Manage Excursion" : "When do you want to go?"}
         </Button>
       }
     >
       <Modal.Header>
-        {props.isHost ? "Manage Occurrences" : "Choose a time to go!"}
+        {props.isHost ? (
+          <div>
+            Manage Occurrences
+            <Button floated="right" onClick={props.handleDelete}>
+              Delete this Excursion
+            </Button>{" "}
+          </div>
+        ) : (
+          "Choose a time to go!"
+        )}
       </Modal.Header>
       <Modal.Content>
         {props.isHost ? (
-          <div>
-            <AddExcursionOccurrence
-              excursion_id={props.excursion.id}
-              duration={props.excursion.duration}
-            />
-            <Button onClick={props.handleDelete}>Delete this Excursion</Button>
-          </div>
+          <AddExcursionOccurrence
+            excursion_id={props.excursion.id}
+            duration={props.excursion.duration}
+          />
         ) : null}
 
         <Card.Group itemsPerRow={1}>{occurrences}</Card.Group>

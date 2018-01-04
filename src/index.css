@@ -4,6 +4,28 @@ body {
   margin: 0;
   padding: 0;
   font-family: "Poppins", sans-serif;
+  background-image: url("./images/Ramy-background2.jpg");
+}
+
+.home-page {
+  width: 2000px;
+  height: 1000px;
+  background-image: url("https://images.unsplash.com/photo-1484544808355-8ec84e534d75?auto=format&fit=crop&w=1366&q=80");
+  background-repeat: no-repeat;
+  background-size: 2000px 1200px;
+}
+
+.home-page-info {
+  position: relative;
+  top: 50%;
+  bottom: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.menu-text {
+  position: relative;
+  bottom: 8px;
 }
 
 h1,
@@ -17,9 +39,9 @@ div {
   font-family: "Poppins", sans-serif !important;
 }
 
-h1 {
-  color: #38046b !important;
-}
+/* h1 {
+  color: #eef5ff !important;
+} */
 
 .navbar {
   border-style: none;
@@ -28,6 +50,16 @@ h1 {
 
 .city-show {
   padding: 10px 50px 10px 50px;
+}
+
+.city-show-header {
+  height: 350px;
+  background-color: transparent !important;
+}
+
+.city-show-body {
+  position: relative;
+  background-color: transparent !important;
 }
 
 .city-cover {
@@ -40,6 +72,7 @@ h1 {
 .excursion-card {
   height: 250px;
   width: 250px;
+  background-color: transparent !important;
 }
 
 .excursion-card-img {
@@ -79,7 +112,7 @@ h1 {
 .carousel-prev-arrow:hover,
 .carousel-next-arrow:hover {
   transform: scale(1.7);
-  color: #38046b;
+  color: #eef5ff;
 }
 .carousel-next-arrow {
   right: 0%;
@@ -132,8 +165,9 @@ h1 {
 
 .review-card {
   position: relative;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 5em;
+  text-align: center;
+  background-color: transparent !important;
 }
 
 .excursion-grid {
@@ -142,5 +176,5 @@ h1 {
 
 .scrollable-column {
   height: 100%;
-  overflow: auto;
+  overflow-y: auto;
 }

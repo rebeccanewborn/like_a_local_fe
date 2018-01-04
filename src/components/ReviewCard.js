@@ -6,7 +6,7 @@ const ReviewCard = props => {
   return (
     <Modal
       trigger={
-        <Card>
+        <Card className="review-card">
           <Card.Header>{props.review.user_name}</Card.Header>
           <Card.Meta>{props.review.posted}</Card.Meta>
           <Card.Description>
