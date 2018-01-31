@@ -4,30 +4,43 @@ body {
   margin: 0;
   padding: 0;
   font-family: "Poppins", sans-serif;
-  background-image: url("./images/map2.jpg");
-  background-repeat: repeat;
+  /* background-image: url("./images/map2.jpg"); */
+  /* background-repeat: repeat; */
 }
 
 .home-page {
-  width: 2000px;
-  height: 1000px;
+  width: 1500px;
+  height: 720px;
   background-image: url("https://images.unsplash.com/photo-1484544808355-8ec84e534d75?auto=format&fit=crop&w=1366&q=80");
   background-repeat: no-repeat;
-  background-size: 2000px 1200px;
+  background-size: 1500px 720px;
 }
 
 .home-page-info {
   position: relative;
-  top: 50%;
-  bottom: 50%;
+  top: 40%;
+  bottom: 70%;
   left: 50%;
   transform: translateX(-50%);
   background-color: transparent !important;
 }
 
+.home-page-button {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 .menu-text {
   position: relative;
   bottom: 8px;
+}
+
+.dz-progress {
+  visibility: hidden;
+}
+.dz-image-preview {
+  background-color: transparent !important;
 }
 
 h1,
@@ -48,6 +61,11 @@ div {
 .navbar {
   border-style: none;
   padding: 0px 20px;
+}
+
+.cities-index {
+  position: relative;
+  right: 20px;
 }
 
 .city-show {
@@ -84,7 +102,7 @@ div {
 
 .carousel {
   position: relative;
-  height: 500px;
+  height: 400px;
   width: 100%;
 }
 
@@ -167,16 +185,19 @@ div {
 
 .review-card {
   position: relative;
-  left: 5em;
   text-align: center;
   background-color: transparent !important;
 }
 
 .excursion-grid {
-  height: 860px;
+  height: 720px;
 }
 
 .scrollable-column {
   height: 100%;
   overflow-y: auto;
+}
+
+.static-colum {
+  height: 100%;
 }

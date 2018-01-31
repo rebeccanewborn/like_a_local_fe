@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import * as actions from "../actions/excursionActions";
 import CityIndexItem from "./CityIndexItem";
-import { Grid, Header } from "semantic-ui-react";
+import { Grid } from "semantic-ui-react";
 
 class CitiesIndex extends React.Component {
   componentDidMount() {
@@ -16,7 +16,7 @@ class CitiesIndex extends React.Component {
     ));
 
     return (
-      <Grid centered padded>
+      <Grid centered padded className="cities-index">
         <Grid.Row columns={4}>{cityIndexItems}</Grid.Row>
       </Grid>
     );

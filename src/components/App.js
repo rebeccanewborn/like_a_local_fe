@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { Switch, Route, withRouter } from "react-router-dom";
+import { Route, withRouter } from "react-router-dom";
 import LikeALocalContainer from "../containers/LikeALocalContainer";
-import HomePage from "./HomePage";
+
 import actions from "../actions";
 
 //redux imports

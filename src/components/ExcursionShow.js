@@ -1,7 +1,7 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { Grid, Header, Card, Icon, Image } from "semantic-ui-react";
+import { Grid, Header, Card, Icon } from "semantic-ui-react";
 import MapContainer from "./MapContainer";
 import PhotoCarousel from "./PhotoCarousel";
 import Feedback from "./Feedback";
@@ -38,7 +38,7 @@ class ExcursionShow extends React.Component {
     return (
       <Grid relaxed="very" padded className="excursion-grid">
         <Grid.Row columns={3}>
-          <Grid.Column width={4}>
+          <Grid.Column width={4} className="static-column">
             {this.props.excursionLoaded ? (
               <PhotoCarousel photos={this.props.excursion.host_photos} />
             ) : null}
@@ -55,7 +55,7 @@ class ExcursionShow extends React.Component {
             <br />
             {this.props.isHost ? null : <Feedback />}
           </Grid.Column>
-          <Grid.Column width={8} className="scrollable-column">
+          <Grid.Column width={8} className="static-column">
             <Header as="h1" textAlign="center">
               {this.props.excursion.title}
             </Header>
@@ -67,8 +67,6 @@ class ExcursionShow extends React.Component {
             <Header as="h3" textAlign="center">
               {this.props.excursion.description}
             </Header>
-            <br />
-            <br />
             <MapContainer
               coordinates={coordinates}
               address={this.props.excursion.address}

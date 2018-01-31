@@ -10,6 +10,7 @@ const HomePage = props => {
         <Card.Content>
           <Header as="h1">See a city through the eyes of a local</Header>
           <Button
+            className="home-page-button"
             basic
             onClick={() => {
               props.history.push("/login");
