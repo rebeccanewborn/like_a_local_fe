@@ -1,6 +1,6 @@
 # Like a Local
 
-### [Demo](https://drive.google.com/open?id=1AI9Nte2DoOLTmkx8f8WveqwujCEAgRGr)
+## [Demo](https://drive.google.com/open?id=1AI9Nte2DoOLTmkx8f8WveqwujCEAgRGr)
 
 Single Page Web Application in which users can host or attend guided excursions. Avoid the tourist traps of a city, and see hidden gems through the eyes of a local.
 
